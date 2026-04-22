@@ -40173,10 +40173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83273da0c5797de49b8253cd3894780d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoltStats
-  maxHealth: 4
-  currentHealth: 4
-  maxEnergy: 4
-  currentEnergy: 4
+  maxHealth: 50
+  currentHealth: 50
+  maxEnergy: 50
+  currentEnergy: 50
   energyDrainPerSecond: 1
   energyRecoveryPerSecond: 0.5
 --- !u!114 &1898751744
@@ -45336,6 +45336,5 @@ SceneRoots:
   - {fileID: 1823118930}
   - {fileID: 1759067769}
   - {fileID: 98579200}
-  - {fileID: 2002632897}
   - {fileID: 1020353727}
   - {fileID: 495709501}
