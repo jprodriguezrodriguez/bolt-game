@@ -1493,7 +1493,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2075728273}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PlayButton
+        m_MethodName: NewGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4011,6 +4011,7 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 1103331627}
   playMenuPanel: {fileID: 879344424}
   optionsPanel: {fileID: 1719107835}
+  Nivel1: Nivel 1
 --- !u!1 &2079724833
 GameObject:
   m_ObjectHideFlags: 0
