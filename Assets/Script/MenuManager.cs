@@ -1,17 +1,26 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [Header("=== PANELes DEL MEN� ===")]
-    public GameObject mainMenuPanel;      // Panel actual con PLAY, OPTIONS, EXIT
-    public GameObject playMenuPanel;      // El nuevo men� que quieres mostrar al pulsar PLAY
-    public GameObject optionsPanel;       // Panel de opciones (puedes crearlo despu�s)
+    [Header("=== PANELes DEL MENÚ ===")]
+    public GameObject mainMenuPanel;
+    public GameObject playMenuPanel;
+    public GameObject optionsPanel;
+
+    [Header("=== NOMBRE DE LA ESCENA DEL JUEGO ===")]
+    public string Nivel1 = "Nivel 1";   // ← Cambia esto por el nombre EXACTO de tu escena
 
     // ================== BOTONES ==================
     public void PlayButton()
     {
         mainMenuPanel.SetActive(false);
-        playMenuPanel.SetActive(true);
+        playMenuPanel.SetActive(true);     // Muestra el menú de Nueva Partida
+    }
+
+    public void NewGameButton()            // ← NUEVO MÉTODO
+    {
+        SceneManager.LoadScene(Nivel1);
     }
 
     public void OptionsButton()
