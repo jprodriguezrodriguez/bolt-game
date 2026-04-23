@@ -29,11 +29,6 @@ public class Bolt : MonoBehaviour
         {
             Debug.LogError("No se encontró BoltStats en el objeto.");
         }
-
-        if (rb == null)
-        {
-            Debug.LogError("No se encontró Rigidbody en el objeto.");
-        }
     }
 
     void Update()
