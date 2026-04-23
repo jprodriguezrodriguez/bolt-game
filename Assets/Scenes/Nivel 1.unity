@@ -42114,9 +42114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ca22711e841204ea0c101db6570756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bolt
-  speed: 1
+  speed: 3
   rotationSpeed: 120
-  runningSpeed: 3
+  runningSpeed: 6
   jumpForce: 5
 --- !u!1 &1904381836
 GameObject:
