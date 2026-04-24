@@ -29,11 +29,6 @@ public class Bolt : MonoBehaviour
         {
             Debug.LogError("No se encontró BoltStats en el objeto.");
         }
-
-        if (rb == null)
-        {
-            Debug.LogError("No se encontró Rigidbody en el objeto.");
-        }
     }
 
     void Update()
@@ -55,7 +50,7 @@ public class Bolt : MonoBehaviour
 
         if (Keyboard.current.wKey.isPressed)
         {
-            transform.Translate(Vector3.left * currentSpeed * Time.deltaTime, Space.Self);
+            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime, Space.Self);
             anim.SetInteger("boltStates", isRunning ? 3 : 1);
             isMoving = true;
 
@@ -66,7 +61,7 @@ public class Bolt : MonoBehaviour
         }
         else if (Keyboard.current.sKey.isPressed)
         {
-            transform.Translate(Vector3.right * currentSpeed * Time.deltaTime, Space.Self);
+            transform.Translate(Vector3.back * currentSpeed * Time.deltaTime, Space.Self);
             anim.SetInteger("boltStates", isRunning ? 3 : 1);
             isMoving = true;
 

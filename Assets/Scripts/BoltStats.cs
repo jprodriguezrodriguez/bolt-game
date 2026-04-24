@@ -13,7 +13,16 @@ public class BoltStats : MonoBehaviour
     public float energyDrainPerSecond = 1f;
     public float energyRecoveryPerSecond = 0.5f;
 
+    [Header("HUD")]
+    [SerializeField] private HealthBarUI healthBarUI;
+    [SerializeField] private HealthBarUI energyBarUI;
+
     public bool IsRunning { get; set; }
+
+    void Start()
+    {
+        ActualizarHUD();
+    }
 
     void Update()
     {
@@ -28,18 +37,31 @@ public class BoltStats : MonoBehaviour
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        ActualizarHUD();
     }
 
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        ActualizarHUD();
     }
 
     public void RecoverHealth(int amount)
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        ActualizarHUD();
+    }
+
+    private void ActualizarHUD()
+    {
+        if (healthBarUI != null)
+            healthBarUI.ActualizarBarra(currentHealth, maxHealth);
+
+        if (energyBarUI != null)
+            energyBarUI.ActualizarBarra(currentEnergy, maxEnergy);
     }
 
     public int GetEnergyUnits()
