@@ -45,7 +45,25 @@ public class BoltStats : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        ActualizarHUD();
+
+        Debug.Log("Vida actual: " + currentHealth + "/" + maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            Debug.Log("BOLT quedó sin vida.");
+        }
+    }
+
+    public void UseEnergy(int amount)
+    {
+        currentEnergy -= amount;
+        currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
+
+        Debug.Log("Energía actual: " + currentEnergy + "/" + maxEnergy);
+    }
+    public bool HasEnergy(int amount)
+    {
+        return currentEnergy >= amount;
     }
 
     public void RecoverHealth(int amount)
