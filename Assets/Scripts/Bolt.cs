@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class Bolt : MonoBehaviour
 {
     public float speed = 1f;
@@ -11,6 +12,7 @@ public class Bolt : MonoBehaviour
     private Animator anim;
     private BoltStats stats;
     private Rigidbody rb;
+    private PlayerDefense defense;
 
     private bool isGrounded = true;
 
@@ -19,6 +21,7 @@ public class Bolt : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         stats = GetComponent<BoltStats>();
         rb = GetComponentInChildren<Rigidbody>();
+        defense = GetComponent<PlayerDefense>();
 
         if (anim == null)
         {
