@@ -25,6 +25,7 @@ public class ItemsManager : MonoBehaviour
         if (educationalTextContainer != null)
         {
             educationalTextContainer.SetActive(false);
+            Debug.Log(itemsCounterText.text);
         }
     }
 
@@ -42,6 +43,7 @@ public class ItemsManager : MonoBehaviour
     {
         if (itemsCounterText != null)
         {
+            Debug.Log("Pruebaa");
             itemsCounterText.text = "Pistas: " + collectedItems + " - " + totalItems;
         }
     }

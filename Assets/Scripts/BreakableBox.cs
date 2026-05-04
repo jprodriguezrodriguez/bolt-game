@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class BreakableBox : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class BreakableBox : MonoBehaviour
     public Key interactionKey = Key.E;
 
     [Header("UI")]
-    public GameObject interactionText;
+    public GameObject interactionTextContainer;
+    public TextMeshProUGUI interactionText;
+    public string interactionMessage = "Presiona E para romper la caja";
 
     [Header("Effects")]
     public GameObject destroyEffect;
@@ -21,10 +24,7 @@ public class BreakableBox : MonoBehaviour
 
     void Start()
     {
-        if (interactionText != null)
-        {
-            interactionText.SetActive(false);
-        }
+        HideInteractionText();
     }
 
     void Update()
@@ -42,12 +42,9 @@ public class BreakableBox : MonoBehaviour
     {
         isDestroyed = true;
 
-        if (interactionText != null)
-        {
-            interactionText.SetActive(false);
-        }
+        HideInteractionText();
 
-        if (destroyEffect != null)
+        if (destroyEffect != null && boxObject != null)
         {
             Instantiate(destroyEffect, boxObject.transform.position, Quaternion.identity);
         }
@@ -69,13 +66,9 @@ public class BreakableBox : MonoBehaviour
         if (other.CompareTag(playerTag) && !isDestroyed)
         {
             playerIsNear = true;
+            ShowInteractionText();
 
-            if (interactionText != null)
-            {
-                interactionText.SetActive(true);
-            }
-
-            Debug.Log("Jugador cerca de la caja. Presiona E para destruir.");
+            Debug.Log("Jugador cerca de la caja.");
         }
     }
 
@@ -84,11 +77,28 @@ public class BreakableBox : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerIsNear = false;
+            HideInteractionText();
+        }
+    }
 
-            if (interactionText != null)
-            {
-                interactionText.SetActive(false);
-            }
+    private void ShowInteractionText()
+    {
+        if (interactionText != null)
+        {
+            interactionText.text = interactionMessage;
+        }
+
+        if (interactionTextContainer != null)
+        {
+            interactionTextContainer.SetActive(true);
+        }
+    }
+
+    private void HideInteractionText()
+    {
+        if (interactionTextContainer != null)
+        {
+            interactionTextContainer.SetActive(false);
         }
     }
 }
