@@ -29,21 +29,6 @@ public class ItemsManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (itemsCounterText == null) return;
-
-        Debug.Log(
-            "Text activo self: " + itemsCounterText.gameObject.activeSelf +
-            " | Text activo hierarchy: " + itemsCounterText.gameObject.activeInHierarchy +
-            " | Padre: " + itemsCounterText.transform.parent.name +
-            " | Padre activo self: " + itemsCounterText.transform.parent.gameObject.activeSelf +
-            " | Padre activo hierarchy: " + itemsCounterText.transform.parent.gameObject.activeInHierarchy +
-            " | Abuelo: " + itemsCounterText.transform.parent.parent.name +
-            " | Abuelo activo self: " + itemsCounterText.transform.parent.parent.gameObject.activeSelf
-        );
-    }
-
     public void AddItem(string itemTitle, string itemEducationalText)
     {
         collectedItems++;
