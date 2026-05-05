@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class LeverController : MonoBehaviour
 {
@@ -8,9 +9,12 @@ public class LeverController : MonoBehaviour
 
     [Header("Interaction")]
     public string playerTag = "Player";
+    public Key interactionKey = Key.E;
 
     [Header("UI")]
-    public GameObject interactionText;
+    public GameObject interactionTextContainer;
+    public TextMeshProUGUI interactionText;
+    public string interactionMessage = "Presiona E para activar la palanca";
 
     [Header("Visual Indicator")]
     public GameObject visualIndicator;
@@ -23,19 +27,14 @@ public class LeverController : MonoBehaviour
     private bool playerIsNear = false;
     private bool leverActivated = false;
 
-    private Quaternion initialRotation;
     private Quaternion targetRotation;
 
     void Start()
     {
-        if (interactionText != null)
-        {
-            interactionText.SetActive(false);
-        }
+        HideInteractionText();
 
         if (leverShape != null)
         {
-            initialRotation = leverShape.localRotation;
             targetRotation = Quaternion.Euler(activatedRotation);
         }
     }
@@ -44,7 +43,7 @@ public class LeverController : MonoBehaviour
     {
         if (playerIsNear && !leverActivated)
         {
-            if (Keyboard.current.eKey.wasPressedThisFrame)
+            if (Keyboard.current[interactionKey].wasPressedThisFrame)
             {
                 ActivateLever();
             }
@@ -64,10 +63,7 @@ public class LeverController : MonoBehaviour
     {
         leverActivated = true;
 
-        if (interactionText != null)
-        {
-            interactionText.SetActive(false);
-        }
+        HideInteractionText();
 
         if (doorController != null)
         {
@@ -90,11 +86,7 @@ public class LeverController : MonoBehaviour
         if (other.CompareTag(playerTag) && !leverActivated)
         {
             playerIsNear = true;
-
-            if (interactionText != null)
-            {
-                interactionText.SetActive(true);
-            }
+            ShowInteractionText();
 
             Debug.Log("Jugador cerca de la palanca. Presiona E.");
         }
@@ -105,13 +97,30 @@ public class LeverController : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerIsNear = false;
-
-            if (interactionText != null)
-            {
-                interactionText.SetActive(false);
-            }
+            HideInteractionText();
 
             Debug.Log("Jugador se alejó de la palanca.");
+        }
+    }
+
+    private void ShowInteractionText()
+    {
+        if (interactionText != null)
+        {
+            interactionText.text = interactionMessage;
+        }
+
+        if (interactionTextContainer != null)
+        {
+            interactionTextContainer.SetActive(true);
+        }
+    }
+
+    private void HideInteractionText()
+    {
+        if (interactionTextContainer != null)
+        {
+            interactionTextContainer.SetActive(false);
         }
     }
 }
