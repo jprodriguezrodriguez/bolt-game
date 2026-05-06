@@ -73,6 +73,25 @@ public class BoltStats : MonoBehaviour
         ActualizarHUD();
     }
 
+    public void HealFull()
+    {
+        currentHealth = maxHealth;
+        ActualizarHUD();
+    }
+
+    public void RechargeFullEnergy()
+    {
+        currentEnergy = maxEnergy;
+        ActualizarHUD();
+        Debug.Log("Energía restaurada al máximo: " + currentEnergy);
+    }
+
+    public void RechargeAll()
+    {
+        HealFull();
+        RechargeFullEnergy();
+    }
+
     private void ActualizarHUD()
     {
         if (healthBarUI != null)
