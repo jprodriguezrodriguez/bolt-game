@@ -19,6 +19,13 @@ public class ItemsManager : MonoBehaviour
     public float missionMessageDuration = 5f;
     public string missionCompletedMessage = "<b>MISIÓN ACTUALIZADA</b>\nAhora puedes enfrentar al Titán de Vapor";
 
+    [Header("Initial Mission")]
+    public GameObject initialMissionTextContainer;
+    public TextMeshProUGUI initialMissionText;
+    public bool showInitialMissionOnStart = true;
+    public float initialMissionDuration = 4f;
+    public string initialMissionMessage = "<b>OBJETIVO</b>\nBusca las 3 pistas para avanzar";
+
     [Header("Counter UI")]
     public TextMeshProUGUI itemsCounterText;
 
@@ -27,13 +34,15 @@ public class ItemsManager : MonoBehaviour
     public GameObject steamEffect;
     public Animator steamTitanAnimator;
     public string titanAppearTrigger = "Appear";
-
     private bool titanUnlocked = false;
+
     private Coroutine educationalCoroutine;
     private Coroutine missionCoroutine;
 
     void Start()
     {
+        Debug.Log("ItemsManager inició.");
+
         UpdateCounterUI();
 
         if (educationalTextContainer != null)
@@ -42,11 +51,19 @@ public class ItemsManager : MonoBehaviour
         if (missionTextContainer != null)
             missionTextContainer.SetActive(false);
 
+        if (missionText != null)
+            missionText.gameObject.SetActive(true);
+
         if (steamTitan != null)
             steamTitan.SetActive(false);
 
         if (steamEffect != null)
             steamEffect.SetActive(false);
+
+        if (showInitialMissionOnStart)
+        {
+            ShowMissionMessage(initialMissionMessage, initialMissionDuration);
+        }
     }
 
     public void AddItem(string itemTitle, string itemEducationalText)
@@ -56,16 +73,34 @@ public class ItemsManager : MonoBehaviour
 
         bool completedMission = collectedItems >= totalItems;
 
-        if (educationalCoroutine != null)
+        if (!titanUnlocked && completedMission)
         {
-            StopCoroutine(educationalCoroutine);
+            if (educationalCoroutine != null)
+                StopCoroutine(educationalCoroutine);
+
+            educationalCoroutine = StartCoroutine(ShowFinalEducationalThenMissionCoroutine(itemTitle, itemEducationalText));
+        }
+        else if (!titanUnlocked)
+        {
+            ShowEducationalMessage(itemTitle, itemEducationalText);
         }
 
-        educationalCoroutine = StartCoroutine(
-            ShowEducationalMessageCoroutine(itemTitle, itemEducationalText, completedMission)
-        );
-
         UpdateCounterUI();
+    }
+
+    private IEnumerator ShowFinalEducationalThenMissionCoroutine(string title, string message)
+    {
+        if (educationalTextContainer != null && educationalText != null)
+        {
+            educationalTextContainer.SetActive(true);
+            educationalText.text = "<b>" + title + "</b>\n" + message;
+
+            yield return new WaitForSeconds(educationalMessageDuration);
+
+            educationalTextContainer.SetActive(false);
+        }
+
+        UnlockSteamTitan();
     }
 
     private void UpdateCounterUI()
@@ -78,23 +113,28 @@ public class ItemsManager : MonoBehaviour
             itemsCounterText.text = "Derrota al Titán de Vapor";
     }
 
-    private IEnumerator ShowEducationalMessageCoroutine(string title, string message, bool unlockAfter)
+    private void ShowEducationalMessage(string title, string message)
     {
-        if (educationalTextContainer != null)
-            educationalTextContainer.SetActive(true);
+        if (educationalTextContainer == null || educationalText == null)
+        {
+            Debug.LogWarning("No se asignó la UI del mensaje educativo.");
+            return;
+        }
 
-        if (educationalText != null)
-            educationalText.text = "<b>" + title + "</b>\n" + message;
+        if (educationalCoroutine != null)
+            StopCoroutine(educationalCoroutine);
+
+        educationalCoroutine = StartCoroutine(ShowEducationalMessageCoroutine(title, message));
+    }
+
+    private IEnumerator ShowEducationalMessageCoroutine(string title, string message)
+    {
+        educationalTextContainer.SetActive(true);
+        educationalText.text = "<b>" + title + "</b>\n" + message;
 
         yield return new WaitForSeconds(educationalMessageDuration);
 
-        if (educationalTextContainer != null)
-            educationalTextContainer.SetActive(false);
-
-        if (unlockAfter && !titanUnlocked)
-        {
-            UnlockSteamTitan();
-        }
+        educationalTextContainer.SetActive(false);
     }
 
     private void UnlockSteamTitan()
@@ -112,32 +152,39 @@ public class ItemsManager : MonoBehaviour
         if (steamTitanAnimator != null)
             steamTitanAnimator.SetTrigger(titanAppearTrigger);
 
-        ShowMissionMessage(missionCompletedMessage);
-        UpdateCounterUI();
+        ShowMissionMessage(missionCompletedMessage, missionMessageDuration);
     }
 
-    private void ShowMissionMessage(string message)
+    private void ShowMissionMessage(string message, float duration)
     {
         if (missionTextContainer == null || missionText == null)
         {
-            Debug.LogWarning("No se asignó la UI del mensaje de misión en ItemsManager.");
+            Debug.LogWarning("No se asignó la UI del mensaje de misión.");
             return;
         }
 
         if (missionCoroutine != null)
             StopCoroutine(missionCoroutine);
 
-        missionCoroutine = StartCoroutine(ShowMissionMessageCoroutine(message));
+        missionCoroutine = StartCoroutine(ShowMissionMessageCoroutine(message, duration));
     }
 
-    private IEnumerator ShowMissionMessageCoroutine(string message)
+    private IEnumerator ShowMissionMessageCoroutine(string message, float duration)
     {
-        missionTextContainer.SetActive(true);
-        missionText.text = message;
+        Debug.Log("Mostrando mensaje de misión: " + message);
 
-        yield return new WaitForSeconds(missionMessageDuration);
+        initialMissionTextContainer.SetActive(true);
 
-        missionTextContainer.SetActive(false);
+        if (initialMissionText != null)
+        {
+            initialMissionText.gameObject.SetActive(true);
+            initialMissionText.text = message;
+        }
+
+        yield return null;
+        yield return new WaitForSeconds(duration);
+
+        initialMissionTextContainer.SetActive(false);
     }
 
     public int GetCollectedItems()
