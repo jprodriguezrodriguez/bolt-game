@@ -107860,7 +107860,7 @@ MonoBehaviour:
   fase2Umbral: 70
   fase3Umbral: 30
   faseActual: 1
-  puntoDebil: {fileID: 0}
+  puntoDebil: {fileID: 1031016421}
   multiplicadorPuntoDebil: 3.5
   PortalSiguienteNivel: {fileID: 829054394}
   animator: {fileID: 0}
