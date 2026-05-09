@@ -29,6 +29,7 @@ public class Portal_Controller : MonoBehaviour
     private void Awake()
     {
         Setup();
+        TogglePortal(true);
     }
 
     //Call this function to activate or deactivate the effects
