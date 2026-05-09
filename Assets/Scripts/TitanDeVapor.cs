@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class TitanDeVapor : MonoBehaviour
 {
-    // === PARÁMETROS QUE TÚ DEFINES ===
     [Header("Salud")]
     public float saludMaxima = 100f;
     private float saludActual;
 
     [Header("Fases")]
-    public float fase2Umbral = 70f;  // Cambia a fase 2 al 70% salud
-    public float fase3Umbral = 30f;  // Cambia a fase 3 al 30% salud
+    public float fase2Umbral = 70f;
+    public float fase3Umbral = 30f;
     public int faseActual = 1;
 
     [Header("Ataques")]
@@ -19,14 +18,22 @@ public class TitanDeVapor : MonoBehaviour
 
     [Header("Punto Débil")]
     public GameObject puntoDebil;
-    public float multiplicadorPuntoDebil = 3.5f;  // 35 de daño vs 10 normal
+    public float multiplicadorPuntoDebil = 3.5f;
 
     [Header("Referencias")]
     public Animator animator;
 
+    [Header("Portal")]
+    public GameObject portalNivel2;
+
     void Start()
     {
         saludActual = saludMaxima;
+
+        if (portalNivel2 != null)
+        {
+            portalNivel2.SetActive(false);
+        }
     }
 
     public void RecibirDaño(float daño, bool esPuntoDebil)
@@ -40,7 +47,6 @@ public class TitanDeVapor : MonoBehaviour
         saludActual -= daño;
         Debug.Log("Salud del Titán: " + saludActual);
 
-        // Cambiar de fase según salud
         if (saludActual <= saludMaxima * 0.3f && faseActual < 3)
         {
             faseActual = 3;
@@ -61,6 +67,12 @@ public class TitanDeVapor : MonoBehaviour
     void Morir()
     {
         Debug.Log("Titán de Vapor derrotado");
+
+        if (portalNivel2 != null)
+        {
+            portalNivel2.SetActive(true);
+        }
+
         Destroy(gameObject);
     }
 }

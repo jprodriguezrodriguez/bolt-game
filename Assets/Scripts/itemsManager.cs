@@ -152,6 +152,8 @@ public class ItemsManager : MonoBehaviour
         if (steamTitanAnimator != null)
             steamTitanAnimator.SetTrigger(titanAppearTrigger);
 
+        UpdateCounterUI();
+
         ShowMissionMessage(missionCompletedMessage, missionMessageDuration);
     }
 
