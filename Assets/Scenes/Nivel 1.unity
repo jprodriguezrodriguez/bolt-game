@@ -22697,6 +22697,7 @@ Transform:
   m_LocalScale: {x: 500, y: 1, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1167634883}
   - {fileID: 1684757462}
   - {fileID: 1030475222}
   - {fileID: 2132955103}
@@ -22821,7 +22822,6 @@ Transform:
   - {fileID: 1574741093}
   - {fileID: 2071724654}
   - {fileID: 303662259}
-  - {fileID: 1167634883}
   - {fileID: 1504667187}
   - {fileID: 1857282863}
   - {fileID: 446913512}
@@ -26573,7 +26573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &829054395
 Transform:
   m_ObjectHideFlags: 0
