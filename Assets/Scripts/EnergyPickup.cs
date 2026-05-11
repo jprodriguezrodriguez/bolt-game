@@ -15,7 +15,20 @@ public class EnergyPickup : MonoBehaviour
         if (playerStats != null)
         {
             playerStats.RechargeFullEnergy();
-            Destroy(gameObject);
+
+            if (PickupMessageUI.Instance != null)
+            {
+                PickupMessageUI.Instance.ShowMessage("BOLT ha recargado toda su energía");
+            }
+
+            if (transform.parent != null)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

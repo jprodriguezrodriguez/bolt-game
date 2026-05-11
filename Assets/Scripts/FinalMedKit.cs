@@ -12,8 +12,21 @@ public class FinalMedKit : MonoBehaviour
             {
                 Debug.Log("FinalKit recogido.");
                 playerStats.RechargeAll();
-
                 Destroy(transform.parent.gameObject);
+
+                if (PickupMessageUI.Instance != null)
+                {
+                    PickupMessageUI.Instance.ShowMessage("BOLT ha recuperado toda su vida y energía");
+                }
+
+                if (transform.parent != null)
+                {
+                    Destroy(transform.parent.gameObject);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

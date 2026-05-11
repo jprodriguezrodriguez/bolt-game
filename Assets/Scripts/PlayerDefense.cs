@@ -95,6 +95,9 @@ public class PlayerDefense : MonoBehaviour
 
             ApplyKnockback(explosionPosition, 0.4f);
 
+            if (DamageFlashUI.Instance != null)
+                DamageFlashUI.Instance.ShowBlockedFlash();
+
             Debug.Log("BOLT se cubrió. Daño reducido y empuje menor.");
         }
         else
@@ -103,15 +106,47 @@ public class PlayerDefense : MonoBehaviour
 
             ApplyKnockback(explosionPosition, 1f);
 
+            if (DamageFlashUI.Instance != null)
+                DamageFlashUI.Instance.ShowDamageFlash();
+
             Debug.Log("BOLT no se cubrió. Daño completo y empuje fuerte.");
         }
     }
 
-    public void ApplyKnockback(Vector3 explosionPosition, float forceMultiplier = 1f)
+    public void ApplyTitanDamage(int normalDamage, int coveredDamage, Vector3 titanPosition)
+    {
+        if (stats == null) return;
+
+        if (isCovering && stats.HasEnergy(energyCostOnHit))
+        {
+            stats.TakeDamage(coveredDamage);
+            stats.UseEnergy(energyCostOnHit);
+
+            ApplyKnockback(titanPosition, 0.5f);
+
+            if (DamageFlashUI.Instance != null)
+                DamageFlashUI.Instance.ShowBlockedFlash();
+
+            Debug.Log("BOLT bloqueó parcialmente el golpe del Titán.");
+        }
+        else
+        {
+            stats.TakeDamage(normalDamage);
+
+            ApplyKnockback(titanPosition, 1f);
+
+            if (DamageFlashUI.Instance != null)
+                DamageFlashUI.Instance.ShowDamageFlash();
+
+            Debug.Log("BOLT recibió el golpe completo del Titán.");
+        }
+    }
+
+    public void ApplyKnockback(Vector3 damageSourcePosition, float forceMultiplier = 1f)
     {
         if (playerRigidbody == null) return;
 
-        Vector3 direction = transform.position - explosionPosition;
+        Vector3 direction = transform.position - damageSourcePosition;
         direction.y = 0f;
         direction.Normalize();
 
@@ -120,6 +155,6 @@ public class PlayerDefense : MonoBehaviour
 
         playerRigidbody.AddForce(finalForce, ForceMode.Impulse);
 
-        Debug.Log("BOLT fue empujado por la explosión.");
+        Debug.Log("BOLT fue empujado.");
     }
 }

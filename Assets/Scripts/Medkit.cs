@@ -14,6 +14,20 @@ public class Medkit : MonoBehaviour
                 playerStats.HealFull();
                 Debug.Log("Medkit recogido. Vida actual: " + playerStats.currentHealth + "/" + playerStats.maxHealth);
                 Destroy(gameObject);
+
+                if (PickupMessageUI.Instance != null)
+                {
+                    PickupMessageUI.Instance.ShowMessage("BOLT ha recuperado toda su vida");
+                }
+
+                if (transform.parent != null)
+                {
+                    Destroy(transform.parent.gameObject);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
