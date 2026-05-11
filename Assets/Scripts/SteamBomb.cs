@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class SteamBombEnemy : MonoBehaviour
 {
@@ -16,20 +18,45 @@ public class SteamBombEnemy : MonoBehaviour
     public int normalDamage = 2;
     public int coveredDamage = 1;
 
+    [Header("Respawn")]
+    public float respawnDelay = 5f;
+
     [Header("References")]
     public Animator animator;
 
     [Header("Visual")]
+    public GameObject visualObject;
+    public Collider bombCollider;
     public GameObject explosionEffect;
+
+    [Header("UI")]
+    public GameObject warningTextContainer;
+    public TextMeshProUGUI warningText;
+    public string warningMessage = "Presiona Q para cubrirte";
 
     private Transform player;
     private bool isExploding = false;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
 
     void Start()
     {
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
+        }
+
+        if (bombCollider == null)
+        {
+            bombCollider = GetComponent<Collider>();
+        }
+
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+
+        if (warningTextContainer != null)
+        {
+            warningTextContainer.SetActive(false);
         }
     }
 
@@ -95,8 +122,17 @@ public class SteamBombEnemy : MonoBehaviour
             animator.SetTrigger("attack01");
         }
 
-        Debug.Log("Bomba de vapor activada. Va a explotar.");
+        if (warningTextContainer != null)
+        {
+            warningTextContainer.SetActive(true);
+        }
 
+        if (warningText != null)
+        {
+            warningText.text = warningMessage;
+        }
+
+        Debug.Log("Bomba de vapor activada. Va a explotar.");
         Invoke(nameof(Explode), explosionDelay);
     }
 
@@ -127,9 +163,56 @@ public class SteamBombEnemy : MonoBehaviour
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
 
+        if (warningTextContainer != null)
+        {
+            warningTextContainer.SetActive(false);
+        }
+
         Debug.Log("Bomba de vapor explotó.");
 
-        Destroy(gameObject);
+        StartCoroutine(RespawnBomb());
+    }
+
+    private IEnumerator RespawnBomb()
+    {
+        Debug.Log("Inicio respawn");
+
+        if (visualObject != null)
+        {
+            visualObject.SetActive(false);
+        }
+
+        if (bombCollider != null)
+        {
+            bombCollider.enabled = false;
+        }
+
+        SetWalkAnimation(false);
+
+        yield return new WaitForSeconds(respawnDelay);
+
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+
+        if (visualObject != null)
+        {
+            visualObject.SetActive(true);
+        }
+
+        if (bombCollider != null)
+        {
+            bombCollider.enabled = true;
+        }
+
+        if (animator != null)
+        {
+            animator.Rebind();
+            animator.Update(0f);
+        }
+
+        isExploding = false;
+
+        Debug.Log("Bomba de vapor reapareció.");
     }
 
     private void SetWalkAnimation(bool value)

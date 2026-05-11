@@ -19,6 +19,10 @@ public class BreakableBox : MonoBehaviour
     [Header("Effects")]
     public GameObject destroyEffect;
 
+    [Header("UserGuide")]
+    public GameObject userGuideParticles;
+    public GameObject finalGuidePoint;
+
     private bool playerIsNear = false;
     private bool isDestroyed = false;
 
@@ -51,11 +55,23 @@ public class BreakableBox : MonoBehaviour
 
         if (boxObject != null)
         {
+            Debug.Log(boxObject.name + " destruida.");
             Destroy(boxObject);
         }
         else
         {
+            Debug.Log(gameObject.name + " destruida.");
             Destroy(gameObject);
+        }
+
+        if (userGuideParticles != null)
+        {
+            Destroy(userGuideParticles);
+        }
+
+        if (finalGuidePoint != null)
+        {
+            Destroy(finalGuidePoint);
         }
 
         Debug.Log("Caja destruida.");

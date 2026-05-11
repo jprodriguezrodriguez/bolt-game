@@ -11,7 +11,7 @@ public class PuntoDebil : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerAttack"))  // Asume que el golpe del jugador tiene este tag
+        if (other.CompareTag("Player"))  // Asume que el golpe del jugador tiene este tag
         {
             float daño = 10f;  // Daño base del golpe básico
             titan.RecibirDaño(daño, true);  // true = es punto débil
