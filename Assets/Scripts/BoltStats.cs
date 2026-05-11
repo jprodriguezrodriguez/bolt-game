@@ -18,6 +18,7 @@ public class BoltStats : MonoBehaviour
     [SerializeField] private HealthBarUI energyBarUI;
 
     public bool IsRunning { get; set; }
+    public GameOverManager gameOverManager;
 
     void Start()
     {
@@ -50,7 +51,10 @@ public class BoltStats : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("BOLT quedó sin vida.");
+            currentHealth = 0;
+
+            if (gameOverManager != null)
+                gameOverManager.ShowGameOver();
         }
     }
 

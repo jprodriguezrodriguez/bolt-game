@@ -45,6 +45,8 @@ public class TitanDeVapor : MonoBehaviour
         }
 
         saludActual -= daño;
+        saludActual = Mathf.Clamp(saludActual, 0, saludMaxima);
+
         Debug.Log("Salud del Titán: " + saludActual + "/" + saludMaxima);
 
         // Cambiar de fase según salud
@@ -56,8 +58,8 @@ public class TitanDeVapor : MonoBehaviour
             Debug.Log("Modo furia");
             if (ia != null)
             {
-                ia.velocidad = 5f;
-                ia.tiempoEntreAtaques = 1f;
+                ia.velocidad = 3.5f;
+                ia.tiempoEntreAtaques = 1.5f;
             }
         }
         else if (porcentajeSalud <= fase2Umbral && faseActual < 2)
@@ -66,7 +68,7 @@ public class TitanDeVapor : MonoBehaviour
             Debug.Log("Ataques más rápidos");
             if (ia != null)
             {
-                ia.tiempoEntreAtaques = 1.5f;
+                ia.tiempoEntreAtaques = 2f;
             }
         }
 
@@ -96,27 +98,37 @@ public class TitanDeVapor : MonoBehaviour
         estaMuerto = true;
         Debug.Log("TITÁN DE VAPOR DERROTADO");
 
-        // Animación de muerte
+        // Detener animaciones de movimiento
         if (animator != null)
         {
-            if (HasParameter("Morir"))
-                animator.SetTrigger("Morir");
-            else if (HasParameter("Die"))
-                animator.SetTrigger("Die");
-
-            // Detener animaciones de movimiento
             if (HasParameter("isWalking"))
                 animator.SetBool("isWalking", false);
+
             if (HasParameter("isRunning"))
                 animator.SetBool("isRunning", false);
+
+            if (HasParameter("Speed"))
+                animator.SetFloat("Speed", 0f);
         }
 
         // Desactivar IA
         if (ia != null)
             ia.enabled = false;
 
+        // Activar portal al siguiente nivel
+        if (PortalSiguienteNivel != null)
+        {
+            PortalSiguienteNivel.SetActive(true);
+            Debug.Log("Portal al siguiente nivel activado");
+        }
 
-        // Destruir después de la animación
+        // Mensaje de victoria
+        if (PickupMessageUI.Instance != null)
+        {
+            PickupMessageUI.Instance.ShowMessage("El Titán de Vapor ha sido derrotado");
+        }
+
+        // Desaparece el Titán
         Destroy(gameObject, 1.5f);
     }
 
@@ -129,5 +141,20 @@ public class TitanDeVapor : MonoBehaviour
             if (param.name == paramName) return true;
         }
         return false;
+    }
+
+    public float ObtenerSaludActual()
+    {
+        return saludActual;
+    }
+
+    public float ObtenerSaludMaxima()
+    {
+        return saludMaxima;
+    }
+
+    public float ObtenerPorcentajeSalud()
+    {
+        return saludActual / saludMaxima;
     }
 }

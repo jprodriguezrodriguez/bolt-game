@@ -36,6 +36,14 @@ public class ItemsManager : MonoBehaviour
     public string titanAppearTrigger = "Appear";
     private bool titanUnlocked = false;
 
+    [Header("Combat Hint UI")]
+    public GameObject combatHintContainer;
+    public TextMeshProUGUI combatHintText;
+    public float combatHintDuration = 6f;
+    public string combatHintMessage = "Clic izquierdo: atacar al Titán\nQ: cubrirte de sus ataques";
+
+    private Coroutine combatHintCoroutine;
+
     private Coroutine educationalCoroutine;
     private Coroutine missionCoroutine;
 
@@ -155,6 +163,7 @@ public class ItemsManager : MonoBehaviour
         UpdateCounterUI();
 
         ShowMissionMessage(missionCompletedMessage, missionMessageDuration);
+        ShowCombatHint();
     }
 
     private void ShowMissionMessage(string message, float duration)
@@ -192,5 +201,34 @@ public class ItemsManager : MonoBehaviour
     public int GetCollectedItems()
     {
         return collectedItems;
+    }
+
+    public bool IsTitanUnlocked()
+    {
+        return titanUnlocked;
+    }
+
+    private void ShowCombatHint()
+    {
+        if (combatHintContainer == null || combatHintText == null)
+        {
+            Debug.LogWarning("No se asignó la UI del mensaje de combate.");
+            return;
+        }
+
+        if (combatHintCoroutine != null)
+            StopCoroutine(combatHintCoroutine);
+
+        combatHintCoroutine = StartCoroutine(ShowCombatHintCoroutine());
+    }
+
+    private IEnumerator ShowCombatHintCoroutine()
+    {
+        combatHintContainer.SetActive(true);
+        combatHintText.text = combatHintMessage;
+
+        yield return new WaitForSeconds(combatHintDuration);
+
+        combatHintContainer.SetActive(false);
     }
 }

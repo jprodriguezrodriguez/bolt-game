@@ -9,7 +9,7 @@ public class TitanIA : MonoBehaviour
 
     [Header("Rangos")]
     public float rangoDeteccion = 15f;
-    public float rangoAtaque = 5f;
+    public float rangoAtaque = 2.5f;
     public float rangoPerdida = 20f;
 
     [Header("Movimiento")]
@@ -17,11 +17,16 @@ public class TitanIA : MonoBehaviour
     public float velocidadRotacion = 5f;
 
     [Header("Ataque")]
-    public int dañoAtaque = 20;
+    public int dañoAtaque = 10;
     public float tiempoEntreAtaques = 2f;
     private float tiempoProximoAtaque;
 
+    [Header("Precisión del ataque")]
+    public float distanciaRealDeGolpe = 3.5f;
+    public float anguloDeGolpe = 270f;
+
     private BoltStats boltStats;
+    private PlayerDefense playerDefense;
 
     void Start()
     {
@@ -32,6 +37,7 @@ public class TitanIA : MonoBehaviour
         {
             jugador = bolt.transform;
             boltStats = bolt.GetComponent<BoltStats>();
+            playerDefense = bolt.GetComponent<PlayerDefense>();
         }
 
         animator = GetComponent<Animator>();
@@ -122,10 +128,45 @@ public class TitanIA : MonoBehaviour
 
     void AplicarDaño()
     {
-        if (boltStats != null && titanVida != null && !titanVida.estaMuerto)
+        if (titanVida != null && titanVida.estaMuerto)
+            return;
+
+        if (jugador == null)
+            return;
+
+        Vector3 direccionAlJugador = jugador.position - transform.position;
+        direccionAlJugador.y = 0f;
+
+        float distancia = direccionAlJugador.magnitude;
+
+        if (distancia > distanciaRealDeGolpe)
+        {
+            Debug.Log("BOLT esquivó el golpe por distancia.");
+            return;
+        }
+
+        float angulo = Vector3.Angle(transform.forward, direccionAlJugador.normalized);
+
+        if (angulo > anguloDeGolpe)
+        {
+            Debug.Log("BOLT esquivó el golpe porque no estaba al frente del Titán.");
+            return;
+        }
+
+        if (playerDefense != null)
+        {
+            playerDefense.ApplyTitanDamage(
+                dañoAtaque,
+                Mathf.RoundToInt(dañoAtaque * 0.4f),
+                transform.position
+            );
+
+            Debug.Log($"Daño del Titán aplicado a BOLT: {dañoAtaque}");
+        }
+        else if (boltStats != null)
         {
             boltStats.TakeDamage(dañoAtaque);
-            Debug.Log("Daño aplicado a BOLT: {dañoAtaque}");
+            Debug.Log($"Daño aplicado a BOLT sin defensa: {dañoAtaque}");
         }
     }
 

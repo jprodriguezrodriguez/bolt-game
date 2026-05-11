@@ -1,34 +1,24 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PortalTeleport : MonoBehaviour
 {
-    [Header("Teleport")]
+    [Header("Scene Load")]
     public string playerTag = "Player";
-    public Transform destinationPoint;
+    public string sceneName = "Nivel 2";
 
-    private bool hasTeleported = false;
+    private bool hasLoaded = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasTeleported) return;
-        if (!other.CompareTag(playerTag) || destinationPoint == null) return;
+        if (hasLoaded) return;
+        if (!other.CompareTag(playerTag)) return;
 
-        Rigidbody rb = other.GetComponent<Rigidbody>();
+        hasLoaded = true;
 
-        if (rb == null)
-            rb = other.GetComponentInChildren<Rigidbody>();
+        Time.timeScale = 1f;
 
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        other.transform.position = destinationPoint.position;
-        other.transform.rotation = destinationPoint.rotation;
-
-        hasTeleported = true;
-
-        Debug.Log("BOLT fue teletransportado a: " + destinationPoint.position);
+        Debug.Log("Cargando escena: " + sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 }
