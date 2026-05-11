@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class Bolt : MonoBehaviour
 {
     public float speed = 1f;
@@ -11,6 +12,7 @@ public class Bolt : MonoBehaviour
     private Animator anim;
     private BoltStats stats;
     private Rigidbody rb;
+    private PlayerDefense defense;
 
     private bool isGrounded = true;
 
@@ -19,6 +21,7 @@ public class Bolt : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         stats = GetComponent<BoltStats>();
         rb = GetComponentInChildren<Rigidbody>();
+        defense = GetComponent<PlayerDefense>();
 
         if (anim == null)
         {
@@ -28,11 +31,6 @@ public class Bolt : MonoBehaviour
         if (stats == null)
         {
             Debug.LogError("No se encontró BoltStats en el objeto.");
-        }
-
-        if (rb == null)
-        {
-            Debug.LogError("No se encontró Rigidbody en el objeto.");
         }
     }
 
@@ -55,7 +53,7 @@ public class Bolt : MonoBehaviour
 
         if (Keyboard.current.wKey.isPressed)
         {
-            transform.Translate(Vector3.left * currentSpeed * Time.deltaTime, Space.Self);
+            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime, Space.Self);
             anim.SetInteger("boltStates", isRunning ? 3 : 1);
             isMoving = true;
 
@@ -66,7 +64,7 @@ public class Bolt : MonoBehaviour
         }
         else if (Keyboard.current.sKey.isPressed)
         {
-            transform.Translate(Vector3.right * currentSpeed * Time.deltaTime, Space.Self);
+            transform.Translate(Vector3.back * currentSpeed * Time.deltaTime, Space.Self);
             anim.SetInteger("boltStates", isRunning ? 3 : 1);
             isMoving = true;
 

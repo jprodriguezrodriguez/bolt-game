@@ -13,7 +13,17 @@ public class BoltStats : MonoBehaviour
     public float energyDrainPerSecond = 1f;
     public float energyRecoveryPerSecond = 0.5f;
 
+    [Header("HUD")]
+    [SerializeField] private HealthBarUI healthBarUI;
+    [SerializeField] private HealthBarUI energyBarUI;
+
     public bool IsRunning { get; set; }
+    public GameOverManager gameOverManager;
+
+    void Start()
+    {
+        ActualizarHUD();
+    }
 
     void Update()
     {
@@ -28,18 +38,71 @@ public class BoltStats : MonoBehaviour
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        ActualizarHUD();
     }
 
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        Debug.Log("Vida actual: " + currentHealth + "/" + maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+
+            if (gameOverManager != null)
+                gameOverManager.ShowGameOver();
+        }
+    }
+
+    public void UseEnergy(int amount)
+    {
+        currentEnergy -= amount;
+        currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
+
+        Debug.Log("Energía actual: " + currentEnergy + "/" + maxEnergy);
+    }
+    public bool HasEnergy(int amount)
+    {
+        return currentEnergy >= amount;
     }
 
     public void RecoverHealth(int amount)
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        ActualizarHUD();
+    }
+
+    public void HealFull()
+    {
+        currentHealth = maxHealth;
+        ActualizarHUD();
+    }
+
+    public void RechargeFullEnergy()
+    {
+        currentEnergy = maxEnergy;
+        ActualizarHUD();
+        Debug.Log("Energía restaurada al máximo: " + currentEnergy);
+    }
+
+    public void RechargeAll()
+    {
+        HealFull();
+        RechargeFullEnergy();
+    }
+
+    private void ActualizarHUD()
+    {
+        if (healthBarUI != null)
+            healthBarUI.ActualizarBarra(currentHealth, maxHealth);
+
+        if (energyBarUI != null)
+            energyBarUI.ActualizarBarra(currentEnergy, maxEnergy);
     }
 
     public int GetEnergyUnits()

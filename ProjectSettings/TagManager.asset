@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - WeakPoint
+  - Ground
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX
