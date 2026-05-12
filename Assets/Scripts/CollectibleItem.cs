@@ -17,6 +17,10 @@ public class CollectibleItem : MonoBehaviour
     [Header("Visual")]
     public GameObject visualObject;
 
+    [Header("UserGuide")]
+    public GameObject userGuideParticles;
+    public GameObject finalGuidePoint;
+
     private bool collected = false;
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +53,11 @@ public class CollectibleItem : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+        }
+
+        if (userGuideParticles != null)
+        {
+            Destroy(userGuideParticles);
         }
 
         Debug.Log("Ítem recolectado: " + gameObject.name);

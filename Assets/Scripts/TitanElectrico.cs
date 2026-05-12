@@ -23,6 +23,7 @@ public class TitanElectrico : MonoBehaviour
     public float dañoRayo = 30f;
 
     [Header("Recompensa al morir")]
+    public GameObject portalSiguienteNivel;
     public GameObject barreraSiguienteNivel;
 
     [Header("Referencias")]
@@ -50,6 +51,8 @@ public class TitanElectrico : MonoBehaviour
         }
 
         saludActual -= daño;
+        saludActual = Mathf.Clamp(saludActual, 0, saludMaxima);
+
         Debug.Log($"💥 Salud del Titán Eléctrico: {saludActual}/{saludMaxima}");
 
         float porcentajeSalud = (saludActual / saludMaxima) * 100f;
@@ -111,9 +114,35 @@ public class TitanElectrico : MonoBehaviour
         if (barreraSiguienteNivel != null)
         {
             barreraSiguienteNivel.SetActive(false);
-            Debug.Log("🚪 Puerta a Zona 3 desbloqueada");
+            Debug.Log("🚪 Barrera desbloqueada");
+        }
+
+        if (portalSiguienteNivel != null)
+        {
+            portalSiguienteNivel.SetActive(true);
+            Debug.Log("Portal al Nivel 3 activado");
+        }
+
+        if (PickupMessageUI.Instance != null)
+        {
+            PickupMessageUI.Instance.ShowMessage("El Titán Eléctrico ha sido derrotado");
         }
 
         Destroy(gameObject, 2f);
+    }
+
+    public float ObtenerSaludActual()
+    {
+        return saludActual;
+    }
+
+    public float ObtenerSaludMaxima()
+    {
+        return saludMaxima;
+    }
+
+    public float ObtenerPorcentajeSalud()
+    {
+        return saludActual / saludMaxima;
     }
 }
