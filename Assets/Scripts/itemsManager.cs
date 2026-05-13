@@ -12,6 +12,7 @@ public class ItemsManager : MonoBehaviour
     [Header("Educational UI")]
     public GameObject educationalTextContainer;
     public TextMeshProUGUI educationalText;
+    public Image educationalPanelImage;
     public float educationalMessageDuration = 5f;
 
     [Header("Mission UI")]
@@ -29,6 +30,8 @@ public class ItemsManager : MonoBehaviour
 
     [Header("Counter UI")]
     public TextMeshProUGUI itemsCounterText;
+    public string collectMissionText = "Recolecta las pistas";
+    public string defeatTitanText = "Derrota al Titán de Vapor";
 
     [Header("Titan Unlock")]
     public GameObject steamTitan;
@@ -46,9 +49,18 @@ public class ItemsManager : MonoBehaviour
     [Header("Titan Guide Hint UI")]
     public GameObject titanGuideHintContainer;
     public TextMeshProUGUI titanGuideHintText;
+
+    [Header("Titan Guide Images")]
     public Image titanGuideHintImage;
     public Sprite titanParticlesGuideSprite;
+
+    public Image hintBackgroundImage;
+    public Sprite titanHintBackgroundSprite;
+
+    [Header("Titan Guide Message")]
     public string titanGuideMessage = "Sigue las partículas para encontrar al Titán";
+
+    [Header("Titan Guide Object")]
     public GameObject guideToTitan;
 
     [Header("Retry Settings")]
@@ -88,7 +100,7 @@ public class ItemsManager : MonoBehaviour
             guideToTitan.SetActive(false);
     }
 
-    public void AddItem(string itemTitle, string itemEducationalText)
+    public void AddItem(string itemTitle, string itemEducationalText, Sprite educationalPanelSprite = null)
     {
         collectedItems++;
         Debug.Log("Ítem recolectado. Total: " + collectedItems + " / " + totalItems);
@@ -100,22 +112,29 @@ public class ItemsManager : MonoBehaviour
             if (educationalCoroutine != null)
                 StopCoroutine(educationalCoroutine);
 
-            educationalCoroutine = StartCoroutine(ShowFinalEducationalThenMissionCoroutine(itemTitle, itemEducationalText));
+            educationalCoroutine = StartCoroutine(
+                ShowFinalEducationalThenMissionCoroutine(itemTitle, itemEducationalText, educationalPanelSprite)
+            );
         }
         else if (!titanUnlocked)
         {
-            ShowEducationalMessage(itemTitle, itemEducationalText);
+            ShowEducationalMessage(itemTitle, itemEducationalText, educationalPanelSprite);
         }
 
         UpdateCounterUI();
     }
 
-    private IEnumerator ShowFinalEducationalThenMissionCoroutine(string title, string message)
+    private IEnumerator ShowFinalEducationalThenMissionCoroutine(string title, string message, Sprite panelSprite = null)
     {
-        if (educationalTextContainer != null && educationalText != null)
+        if (educationalTextContainer != null)
         {
             educationalTextContainer.SetActive(true);
-            educationalText.text = "<b>" + title + "</b>\n" + message;
+
+            if (educationalText != null)
+                educationalText.text = "<b>" + title + "</b>\n" + message;
+
+            if (educationalPanelImage != null && panelSprite != null)
+                educationalPanelImage.sprite = panelSprite;
 
             yield return new WaitForSeconds(educationalMessageDuration);
 
@@ -130,14 +149,18 @@ public class ItemsManager : MonoBehaviour
         if (itemsCounterText == null) return;
 
         if (!titanUnlocked)
-            itemsCounterText.text = "Pistas: " + collectedItems + " / " + totalItems;
+        {
+            itemsCounterText.text = collectMissionText + "\n" + collectedItems + " / " + totalItems;
+        }
         else
-            itemsCounterText.text = "Derrota al Titán de Vapor";
+        {
+            itemsCounterText.text = defeatTitanText;
+        }
     }
 
-    private void ShowEducationalMessage(string title, string message)
+    private void ShowEducationalMessage(string title, string message, Sprite panelSprite = null)
     {
-        if (educationalTextContainer == null || educationalText == null)
+        if (educationalTextContainer == null)
         {
             Debug.LogWarning("No se asignó la UI del mensaje educativo.");
             return;
@@ -146,13 +169,20 @@ public class ItemsManager : MonoBehaviour
         if (educationalCoroutine != null)
             StopCoroutine(educationalCoroutine);
 
-        educationalCoroutine = StartCoroutine(ShowEducationalMessageCoroutine(title, message));
+        educationalCoroutine = StartCoroutine(
+            ShowEducationalMessageCoroutine(title, message, panelSprite)
+        );
     }
 
-    private IEnumerator ShowEducationalMessageCoroutine(string title, string message)
+    private IEnumerator ShowEducationalMessageCoroutine(string title, string message, Sprite panelSprite = null)
     {
         educationalTextContainer.SetActive(true);
-        educationalText.text = "<b>" + title + "</b>\n" + message;
+
+        if (educationalText != null)
+            educationalText.text = "<b>" + title + "</b>\n" + message;
+
+        if (educationalPanelImage != null && panelSprite != null)
+            educationalPanelImage.sprite = panelSprite;
 
         yield return new WaitForSeconds(educationalMessageDuration);
 
@@ -259,9 +289,11 @@ public class ItemsManager : MonoBehaviour
         if (titanGuideHintImage != null && titanParticlesGuideSprite != null)
             titanGuideHintImage.sprite = titanParticlesGuideSprite;
 
+        if (hintBackgroundImage != null && titanHintBackgroundSprite != null)
+            hintBackgroundImage.sprite = titanHintBackgroundSprite;
+
         if (guideToTitan != null)
             guideToTitan.SetActive(true);
-
 
         Debug.Log("Guía actualizada: sigue las partículas para encontrar al Titán.");
     }
