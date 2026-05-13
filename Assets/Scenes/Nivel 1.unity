@@ -952,10 +952,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit Game
+  m_text: SALIR DEL JUEGO
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 43ecabb6ff5049a42aba02e7932843f1, type: 2}
-  m_sharedMaterial: {fileID: -5037638662070482860, guid: 43ecabb6ff5049a42aba02e7932843f1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5c21402ec5010ca49a2eced065cd070e, type: 2}
+  m_sharedMaterial: {fileID: 1992252645526793769, guid: 5c21402ec5010ca49a2eced065cd070e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -979,8 +979,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.4
-  m_fontSizeBase: 11.4
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9587,7 +9587,7 @@ GameObject:
   - component: {fileID: 375778287}
   - component: {fileID: 375778286}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: SALIR_DEL_JUEGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9610,8 +9610,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -78}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: -146}
+  m_SizeDelta: {x: 350, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375778286
 MonoBehaviour:
@@ -27097,6 +27097,13 @@ MonoBehaviour:
   combatHintText: {fileID: 1600905096}
   combatHintDuration: 6
   combatHintMessage: "Clic izquierdo: atacar al Tit\xE1n\nQ: cubrirte de sus ataques"
+  titanGuideHintContainer: {fileID: 0}
+  titanGuideHintText: {fileID: 0}
+  titanGuideHintImage: {fileID: 0}
+  titanParticlesGuideSprite: {fileID: 0}
+  titanGuideMessage: "Sigue las part\xEDculas para encontrar al Tit\xE1n"
+  guideToTitan: {fileID: 0}
+  retryTitanUnlockedKey: RetryWithTitanUnlocked
 --- !u!4 &853420287
 Transform:
   m_ObjectHideFlags: 0
@@ -38067,7 +38074,7 @@ GameObject:
   - component: {fileID: 905074054}
   - component: {fileID: 905074053}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: CONTINUAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38090,8 +38097,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 19}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 61}
+  m_SizeDelta: {x: 350, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905074053
 MonoBehaviour:
@@ -46471,6 +46478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameOverManager
   gameOverPanel: {fileID: 631194068}
   itemsManager: {fileID: 853420286}
+  retryTitanUnlockedKey: RetryWithTitanUnlocked
 --- !u!1001 &1030663094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60166,6 +60174,8 @@ MonoBehaviour:
     movimiento."
   playerTag: Player
   visualObject: {fileID: 0}
+  userGuideParticles: {fileID: 0}
+  finalGuidePoint: {fileID: 0}
 --- !u!135 &1357666992
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -62089,6 +62099,8 @@ MonoBehaviour:
     de la era industrial. Al quemarse, produce calor, pero tambi\xE9n genera contaminaci\xF3n."
   playerTag: Player
   visualObject: {fileID: 0}
+  userGuideParticles: {fileID: 0}
+  finalGuidePoint: {fileID: 0}
 --- !u!135 &1441540877
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -63870,6 +63882,8 @@ MonoBehaviour:
     generar movimiento."
   playerTag: Player
   visualObject: {fileID: 0}
+  userGuideParticles: {fileID: 0}
+  finalGuidePoint: {fileID: 0}
 --- !u!135 &1487945602
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -71370,8 +71384,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1567700031}
   - {fileID: 905074052}
+  - {fileID: 1567700031}
   - {fileID: 375778285}
   m_Father: {fileID: 1857282863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -71393,7 +71407,7 @@ GameObject:
   - component: {fileID: 1567700033}
   - component: {fileID: 1567700032}
   m_Layer: 5
-  m_Name: Button
+  m_Name: MENU_PRINCIPAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71416,8 +71430,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: -40}
+  m_SizeDelta: {x: 350, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1567700032
 MonoBehaviour:
@@ -79961,10 +79975,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu Principal
+  m_text: "MEN\xDA PRINCIPAL"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 43ecabb6ff5049a42aba02e7932843f1, type: 2}
-  m_sharedMaterial: {fileID: -5037638662070482860, guid: 43ecabb6ff5049a42aba02e7932843f1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5c21402ec5010ca49a2eced065cd070e, type: 2}
+  m_sharedMaterial: {fileID: 1992252645526793769, guid: 5c21402ec5010ca49a2eced065cd070e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -79988,8 +80002,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7.5
-  m_fontSizeBase: 7.5
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -81477,10 +81491,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: CONTINUAR
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 43ecabb6ff5049a42aba02e7932843f1, type: 2}
-  m_sharedMaterial: {fileID: -5037638662070482860, guid: 43ecabb6ff5049a42aba02e7932843f1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5c21402ec5010ca49a2eced065cd070e, type: 2}
+  m_sharedMaterial: {fileID: 1992252645526793769, guid: 5c21402ec5010ca49a2eced065cd070e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -81504,8 +81518,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.4
-  m_fontSizeBase: 11.4
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -84439,6 +84453,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
   pauseMenuUI: {fileID: 1562507258}
+  objectsToHideOnPause:
+  - {fileID: 1684757461}
+  - {fileID: 1167634879}
 --- !u!114 &1857282860
 MonoBehaviour:
   m_ObjectHideFlags: 0
