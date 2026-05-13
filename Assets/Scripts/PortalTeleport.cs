@@ -11,6 +11,11 @@ public class PortalTeleport : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+        Debug.Log("Into portal teleport");
+        Debug.Log(playerTag);
+        Debug.Log(sceneName);
+
         if (hasLoaded) return;
         if (!other.CompareTag(playerTag)) return;
 
