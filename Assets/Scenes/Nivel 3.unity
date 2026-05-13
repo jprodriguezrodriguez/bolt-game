@@ -79685,11 +79685,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 1662906566}
-  itemTitle: "FIBRA \xD3PTICA"
-  educationalText: "La fibra \xF3ptica permite transmitir informaci\xF3n mediante
-    pulsos de luz a gran velocidad. En la era digital, este material es clave para
-    la comunicaci\xF3n entre dispositivos, redes de internet y sistemas conectados,
-    haciendo posible el intercambio r\xE1pido de datos en todo el mundo."
+  itemTitle: 
+  educationalText: 
   educationalPanelSprite: {fileID: 0}
   playerTag: Player
   visualObject: {fileID: 1534490982}
