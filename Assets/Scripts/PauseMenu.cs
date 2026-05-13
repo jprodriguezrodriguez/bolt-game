@@ -1,28 +1,35 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;     // ← Importante
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
-    [Header("Referencias")]
-    public GameObject pauseMenuUI;     // Arrastra aquí el PANEL del menú de pausa
+    [Header("Referencias UI")]
+    public GameObject pauseMenuUI;
+
+    [Header("Objetos a ocultar durante la pausa")]
+    public GameObject[] objectsToHideOnPause;
 
     private bool isPaused = false;
-    private PlayerInput playerInput;   // Para detectar ESC correctamente
 
-    void Awake()
+    private void Start()
     {
-        // Busca el PlayerInput (normalmente está en el jugador o en la cámara)
-        playerInput = FindObjectOfType<PlayerInput>();
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(false);
+
+        SetObjectsVisibility(true);
+
+        Time.timeScale = 1f;
+        LockCursor();
     }
 
-    void Update()
+    private void Update()
     {
-        // Detecta ESC con el nuevo Input System
+        if (Keyboard.current == null)
+            return;
+
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            Debug.Log("ESC presionado");
-
             if (isPaused)
                 Resume();
             else
@@ -32,26 +39,34 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(false);
+
+        SetObjectsVisibility(true);
+
         Time.timeScale = 1f;
         isPaused = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+
+        LockCursor();
     }
 
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(true);
+
+        SetObjectsVisibility(false);
+
         Time.timeScale = 0f;
         isPaused = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+
+        UnlockCursor();
     }
 
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("PLAY HUD");   // ← Cambia por el nombre exacto de tu escena del menú
+        SceneManager.LoadScene("PLAY HUD");
     }
 
     public void QuitGame()
@@ -62,5 +77,29 @@ public class PauseMenu : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    private void SetObjectsVisibility(bool visible)
+    {
+        if (objectsToHideOnPause == null)
+            return;
+
+        foreach (GameObject obj in objectsToHideOnPause)
+        {
+            if (obj != null)
+                obj.SetActive(visible);
+        }
+    }
+
+    private void LockCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void UnlockCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
