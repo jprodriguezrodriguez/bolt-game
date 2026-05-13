@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ItemsManager : MonoBehaviour
 {
@@ -42,6 +43,17 @@ public class ItemsManager : MonoBehaviour
     public float combatHintDuration = 6f;
     public string combatHintMessage = "Clic izquierdo: atacar al Titán\nQ: cubrirte de sus ataques";
 
+    [Header("Titan Guide Hint UI")]
+    public GameObject titanGuideHintContainer;
+    public TextMeshProUGUI titanGuideHintText;
+    public Image titanGuideHintImage;
+    public Sprite titanParticlesGuideSprite;
+    public string titanGuideMessage = "Sigue las partículas para encontrar al Titán";
+    public GameObject guideToTitan;
+
+    [Header("Retry Settings")]
+    public string retryTitanUnlockedKey = "RetryWithTitanUnlocked";
+
     private Coroutine combatHintCoroutine;
 
     private Coroutine educationalCoroutine;
@@ -68,10 +80,12 @@ public class ItemsManager : MonoBehaviour
         if (steamEffect != null)
             steamEffect.SetActive(false);
 
-        if (showInitialMissionOnStart)
+        if (showInitialMissionOnStart && !titanUnlocked)
         {
             ShowMissionMessage(initialMissionMessage, initialMissionDuration);
         }
+        if (guideToTitan != null)
+            guideToTitan.SetActive(false);
     }
 
     public void AddItem(string itemTitle, string itemEducationalText)
@@ -164,6 +178,8 @@ public class ItemsManager : MonoBehaviour
 
         ShowMissionMessage(missionCompletedMessage, missionMessageDuration);
         ShowCombatHint();
+        UpdateTitanGuideHint();
+
     }
 
     private void ShowMissionMessage(string message, float duration)
@@ -230,5 +246,52 @@ public class ItemsManager : MonoBehaviour
         yield return new WaitForSeconds(combatHintDuration);
 
         combatHintContainer.SetActive(false);
+    }
+
+    private void UpdateTitanGuideHint()
+    {
+        if (titanGuideHintContainer != null)
+            titanGuideHintContainer.SetActive(true);
+
+        if (titanGuideHintText != null)
+            titanGuideHintText.text = titanGuideMessage;
+
+        if (titanGuideHintImage != null && titanParticlesGuideSprite != null)
+            titanGuideHintImage.sprite = titanParticlesGuideSprite;
+
+        if (guideToTitan != null)
+            guideToTitan.SetActive(true);
+
+
+        Debug.Log("Guía actualizada: sigue las partículas para encontrar al Titán.");
+    }
+
+    private void RestoreTitanRetryState()
+    {
+        int retryState = PlayerPrefs.GetInt(retryTitanUnlockedKey, 0);
+
+        Debug.Log("ItemsManager leyó " + retryTitanUnlockedKey + " = " + retryState);
+
+        if (retryState == 1)
+        {
+            collectedItems = totalItems;
+            titanUnlocked = true;
+
+            if (steamTitan != null)
+                steamTitan.SetActive(true);
+
+            if (steamEffect != null)
+                steamEffect.SetActive(true);
+
+            if (guideToTitan != null)
+                guideToTitan.SetActive(true);
+
+            UpdateCounterUI();
+
+            // Solo si ya agregaste este método para cambiar texto/imagen guía
+            UpdateTitanGuideHint();
+
+            Debug.Log("Reintento contra el Titán restaurado correctamente.");
+        }
     }
 }

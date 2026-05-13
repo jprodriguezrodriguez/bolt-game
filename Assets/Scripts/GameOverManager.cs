@@ -9,6 +9,9 @@ public class GameOverManager : MonoBehaviour
     [Header("Referencias")]
     public ItemsManager itemsManager;
 
+    [Header("Retry Settings")]
+    public string retryTitanUnlockedKey = "RetryWithTitanUnlocked";
+
     private bool gameOverActive = false;
 
     private void Start()
@@ -26,16 +29,12 @@ public class GameOverManager : MonoBehaviour
 
         gameOverActive = true;
 
-        if (itemsManager != null && itemsManager.IsTitanUnlocked())
-        {
-            PlayerPrefs.SetInt("RetryWithTitanUnlocked", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("RetryWithTitanUnlocked", 0);
-        }
+        bool titanUnlocked = itemsManager != null && itemsManager.IsTitanUnlocked();
 
+        PlayerPrefs.SetInt(retryTitanUnlockedKey, titanUnlocked ? 1 : 0);
         PlayerPrefs.Save();
+
+        Debug.Log("GameOver guardó " + retryTitanUnlockedKey + " = " + PlayerPrefs.GetInt(retryTitanUnlockedKey));
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
@@ -45,6 +44,8 @@ public class GameOverManager : MonoBehaviour
 
     public void Retry()
     {
+        Debug.Log("BOTÓN REINTENTAR PRESIONADO");
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

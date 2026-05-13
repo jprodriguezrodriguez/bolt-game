@@ -25,17 +25,32 @@ public class BoltPunchHitbox : MonoBehaviour
         if (!puedeHacerDaño || yaGolpeoEnEsteAtaque)
             return;
 
-        TitanDeVapor titan = other.GetComponent<TitanDeVapor>();
+        TitanDeVapor titanVapor = other.GetComponent<TitanDeVapor>();
 
-        if (titan == null)
-            titan = other.GetComponentInParent<TitanDeVapor>();
+        if (titanVapor == null)
+            titanVapor = other.GetComponentInParent<TitanDeVapor>();
 
-        if (titan != null)
+        if (titanVapor != null)
         {
-            titan.RecibirDaño(daño, false);
+            titanVapor.RecibirDaño(daño, false);
             yaGolpeoEnEsteAtaque = true;
 
-            Debug.Log("BOLT golpeó al Titán correctamente.");
+            Debug.Log("BOLT golpeó al Titán de Vapor correctamente.");
+            return;
+        }
+
+        TitanElectrico titanElectrico = other.GetComponent<TitanElectrico>();
+
+        if (titanElectrico == null)
+            titanElectrico = other.GetComponentInParent<TitanElectrico>();
+
+        if (titanElectrico != null)
+        {
+            titanElectrico.RecibirDaño(daño, false);
+            yaGolpeoEnEsteAtaque = true;
+
+            Debug.Log("BOLT golpeó al Titán Eléctrico correctamente.");
+            return;
         }
     }
 

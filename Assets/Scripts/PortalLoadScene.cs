@@ -1,21 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PortalTeleport : MonoBehaviour
+public class PortalLoadScene : MonoBehaviour
 {
     [Header("Scene Load")]
     public string playerTag = "Player";
-    public string sceneName = "Nivel 2";
+    public string sceneName = "Nivel3";
 
     private bool hasLoaded = false;
 
     private void OnTriggerEnter(Collider other)
     {
-
-        Debug.Log("Into portal teleport");
-        Debug.Log(playerTag);
-        Debug.Log(sceneName);
-
         if (hasLoaded) return;
         if (!other.CompareTag(playerTag)) return;
 

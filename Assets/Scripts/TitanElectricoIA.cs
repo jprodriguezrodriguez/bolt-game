@@ -22,6 +22,7 @@ public class TitanElectricoIA : MonoBehaviour
     private float tiempoProximoAtaque;
 
     private BoltStats boltStats;
+    private PlayerDefense playerDefense;
 
     void Start()
     {
@@ -29,8 +30,15 @@ public class TitanElectricoIA : MonoBehaviour
         if (bolt != null)
         {
             jugador = bolt.transform;
+
             boltStats = bolt.GetComponent<BoltStats>();
+            playerDefense = bolt.GetComponent<PlayerDefense>();
+
+            if (playerDefense == null)
+                playerDefense = bolt.GetComponentInChildren<PlayerDefense>();
+
             Debug.Log(boltStats != null ? "✅ BoltStats encontrado" : "❌ BoltStats NO encontrado");
+            Debug.Log(playerDefense != null ? "✅ PlayerDefense encontrado" : "❌ PlayerDefense NO encontrado");
         }
 
         animator = GetComponent<Animator>();
@@ -101,10 +109,27 @@ public class TitanElectricoIA : MonoBehaviour
 
     void AplicarDaño()
     {
-        if (boltStats != null && titanVida != null && !titanVida.estaMuerto)
+        if (titanVida != null && titanVida.estaMuerto)
+            return;
+
+        if (playerDefense != null)
+        {
+            playerDefense.ApplyTitanDamage(
+                dañoAtaque,
+                Mathf.RoundToInt(dañoAtaque * 0.4f),
+                transform.position
+            );
+
+            Debug.Log($"💥 Daño eléctrico aplicado mediante PlayerDefense: {dañoAtaque}");
+        }
+        else if (boltStats != null)
         {
             boltStats.TakeDamage(dañoAtaque);
-            Debug.Log($"💥 Daño eléctrico aplicado: {dañoAtaque}");
+
+            if (DamageFlashUI.Instance != null)
+                DamageFlashUI.Instance.ShowDamageFlash();
+
+            Debug.Log($"💥 Daño eléctrico aplicado directo: {dañoAtaque}");
         }
     }
 
