@@ -100053,7 +100053,7 @@ MonoBehaviour:
   "da\xF1oAtaque": 10
   "da\xF1oDescarga": 15
   "da\xF1oRayo": 20
-  portalSiguienteNivel: {fileID: 1642371593}
+  portalSiguienteNivel: {fileID: 1863259379}
   barreraSiguienteNivel: {fileID: 0}
   animator: {fileID: 0}
 --- !u!1 &1245529954
@@ -127678,11 +127678,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1642371596}
   m_SourcePrefab: {fileID: 100100000, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
---- !u!1 &1642371593 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
-  m_PrefabInstance: {fileID: 1642371592}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1642371594 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6923693691316303551, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
