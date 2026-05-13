@@ -33,4 +33,4 @@ public class ControlCinematica : MonoBehaviour
 
         director.stopped -= OnCinematicaTerminada;
     }
-}
+}   
