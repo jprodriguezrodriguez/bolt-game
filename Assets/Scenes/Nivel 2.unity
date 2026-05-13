@@ -16551,9 +16551,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 219441226}
-  itemTitle: "\xCDTEM"
-  educationalText: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  itemTitle: CORRIENTE
+  educationalText: "La corriente necesita un camino cerrado para fluir. Una fuente,
+    un conductor y un receptor. Sin un circuito completo, la energ\xEDa no puede
+    hacer su trabajo."
   playerTag: Player
   visualObject: {fileID: 187810868}
   userGuideParticles: {fileID: 416648468}
@@ -60534,9 +60535,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 219441226}
-  itemTitle: "\xCDTEM"
-  educationalText: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  itemTitle: ELECTRICIDAD
+  educationalText: "La electricidad siempre estuvo ah\xED. En los rayos, en el \xE1mbar,
+    en la naturaleza. Franklin, Volta y Faraday la domaron para convertirla en energ\xEDa
+    \xFAtil para la humanidad."
   playerTag: Player
   visualObject: {fileID: 0}
   userGuideParticles: {fileID: 0}
@@ -149549,12 +149551,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 4.657775, z: 3.1627045}
-  m_Center: {x: 0, y: 1.8288875, z: 0.010353088}
+  m_Size: {x: 1.8662338, y: 4.657775, z: 3.1627045}
+  m_Center: {x: -0.14410019, y: 1.8288875, z: 0.010353088}
 --- !u!4 &1863259382
 Transform:
   m_ObjectHideFlags: 0
@@ -155971,9 +155973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 219441226}
-  itemTitle: "\xCDTEM"
-  educationalText: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  itemTitle: TESLA Y EDISON
+  educationalText: "Tesla y Edison se enfrentaron en la \"Guerra de las Corrientes\".
+    Finalmente, la corriente alterna de Tesla gan\xF3 por ser m\xE1s eficiente a
+    largas distancias."
   playerTag: Player
   visualObject: {fileID: 2005353939}
   userGuideParticles: {fileID: 1657071285}
