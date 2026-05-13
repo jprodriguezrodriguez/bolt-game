@@ -84453,6 +84453,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
   pauseMenuUI: {fileID: 1562507258}
+  objectsToHideOnPause:
+  - {fileID: 1684757461}
+  - {fileID: 1167634879}
 --- !u!114 &1857282860
 MonoBehaviour:
   m_ObjectHideFlags: 0
