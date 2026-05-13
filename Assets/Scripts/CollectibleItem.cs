@@ -9,7 +9,10 @@ public class CollectibleItem : MonoBehaviour
     public string itemTitle = "ÍTEM";
 
     [TextArea(3, 6)]
-    public string educationalText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    public string educationalText = "Texto educativo del ítem.";
+
+    [Header("Educational Panel Image")]
+    public Sprite educationalPanelSprite;
 
     [Header("Interaction")]
     public string playerTag = "Player";
@@ -39,7 +42,7 @@ public class CollectibleItem : MonoBehaviour
 
         if (itemsManager != null)
         {
-            itemsManager.AddItem(itemTitle, educationalText);
+            itemsManager.AddItem(itemTitle, educationalText, educationalPanelSprite);
         }
         else
         {
