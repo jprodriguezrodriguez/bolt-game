@@ -1,26 +1,21 @@
-using Cinemachine;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
+using Cinemachine;
 
 public class ControlCinematica : MonoBehaviour
 {
-    [Header("Playable Director")]
     public PlayableDirector director;
-
-    [Header("Camaras Cinemachine")]
-    public CinemachineVirtualCamera camaraCinematica;
-    public CinemachineVirtualCamera camaraJugador;
-
-    [Header("Control del jugador")]
-    public MonoBehaviour scriptMovimientoJugador;
+    public CinemachineVirtualCamera camCinematica;
+    public CinemachineVirtualCamera camJugador;
+    public MonoBehaviour scriptMovimiento;
 
     void Start()
     {
-        if (scriptMovimientoJugador != null)
-            scriptMovimientoJugador.enabled = false;
+        if (scriptMovimiento != null)
+            scriptMovimiento.enabled = false;
 
-        camaraCinematica.Priority = 10;
-        camaraJugador.Priority = 0;
+        camCinematica.Priority = 20;
+        camJugador.Priority = 10;
 
         director.stopped += OnCinematicaTerminada;
         director.Play();
@@ -28,17 +23,14 @@ public class ControlCinematica : MonoBehaviour
 
     void OnCinematicaTerminada(PlayableDirector pd)
     {
-        camaraCinematica.Priority = 0;
-        camaraJugador.Priority = 10;
+        Debug.Log("✅ Cinemática terminada - volviendo al jugador");
 
-        if (scriptMovimientoJugador != null)
-            scriptMovimientoJugador.enabled = true;
+        camCinematica.Priority = 0;
+        camJugador.Priority = 20;
 
-        director.stopped -= OnCinematicaTerminada;
-    }
+        if (scriptMovimiento != null)
+            scriptMovimiento.enabled = true;
 
-    void OnDestroy()
-    {
         director.stopped -= OnCinematicaTerminada;
     }
 }
