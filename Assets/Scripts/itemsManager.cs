@@ -13,12 +13,14 @@ public class ItemsManager : MonoBehaviour
     public GameObject educationalTextContainer;
     public TextMeshProUGUI educationalText;
     public Image educationalPanelImage;
-    public float educationalMessageDuration = 5f;
+    public TextMeshProUGUI educationalCountdownText;
+    public float educationalMessageDuration = 10f;
+    public bool pauseGameWhileEducationalPanelIsOpen = true;
 
     [Header("Mission UI")]
     public GameObject missionTextContainer;
     public TextMeshProUGUI missionText;
-    public float missionMessageDuration = 5f;
+    public float missionMessageDuration = 12f;
     public string missionCompletedMessage = "<b>MISIÓN ACTUALIZADA</b>\nAhora puedes enfrentar al Titán de Vapor";
 
     [Header("Initial Mission")]
@@ -130,15 +132,49 @@ public class ItemsManager : MonoBehaviour
         {
             educationalTextContainer.SetActive(true);
 
-            if (educationalText != null)
-                educationalText.text = "<b>" + title + "</b>\n" + message;
-
             if (educationalPanelImage != null && panelSprite != null)
+            {
                 educationalPanelImage.sprite = panelSprite;
+                educationalPanelImage.preserveAspect = true;
+                educationalPanelImage.color = Color.white;
+                educationalPanelImage.enabled = true;
+            }
 
-            yield return new WaitForSeconds(educationalMessageDuration);
+            if (educationalText != null)
+            {
+                if (string.IsNullOrWhiteSpace(title) && string.IsNullOrWhiteSpace(message))
+                {
+                    educationalText.gameObject.SetActive(false);
+                }
+                else
+                {
+                    educationalText.gameObject.SetActive(true);
+                    educationalText.text = "<b>" + title + "</b>\n" + message;
+                }
+            }
+
+            PauseGameForEducationalPanel();
+
+            float remainingTime = educationalMessageDuration;
+
+            while (remainingTime > 0f)
+            {
+                if (educationalCountdownText != null)
+                {
+                    educationalCountdownText.gameObject.SetActive(true);
+                    educationalCountdownText.text = "Cierra en " + Mathf.CeilToInt(remainingTime) + "s";
+                }
+
+                remainingTime -= Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            if (educationalCountdownText != null)
+                educationalCountdownText.gameObject.SetActive(false);
 
             educationalTextContainer.SetActive(false);
+
+            ResumeGameAfterEducationalPanel();
         }
 
         UnlockSteamTitan();
@@ -176,17 +212,54 @@ public class ItemsManager : MonoBehaviour
 
     private IEnumerator ShowEducationalMessageCoroutine(string title, string message, Sprite panelSprite = null)
     {
+        if (educationalTextContainer == null)
+            yield break;
+
         educationalTextContainer.SetActive(true);
 
-        if (educationalText != null)
-            educationalText.text = "<b>" + title + "</b>\n" + message;
-
         if (educationalPanelImage != null && panelSprite != null)
+        {
             educationalPanelImage.sprite = panelSprite;
+            educationalPanelImage.preserveAspect = true;
+            educationalPanelImage.color = Color.white;
+            educationalPanelImage.enabled = true;
+        }
 
-        yield return new WaitForSeconds(educationalMessageDuration);
+        if (educationalText != null)
+        {
+            if (string.IsNullOrWhiteSpace(title) && string.IsNullOrWhiteSpace(message))
+            {
+                educationalText.gameObject.SetActive(false);
+            }
+            else
+            {
+                educationalText.gameObject.SetActive(true);
+                educationalText.text = "<b>" + title + "</b>\n" + message;
+            }
+        }
+
+        PauseGameForEducationalPanel();
+
+        float remainingTime = educationalMessageDuration;
+
+        while (remainingTime > 0f)
+        {
+            if (educationalCountdownText != null)
+            {
+                educationalCountdownText.gameObject.SetActive(true);
+                educationalCountdownText.text = "Cierra en " + Mathf.CeilToInt(remainingTime) + "s";
+            }
+
+            remainingTime -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (educationalCountdownText != null)
+            educationalCountdownText.gameObject.SetActive(false);
 
         educationalTextContainer.SetActive(false);
+
+        ResumeGameAfterEducationalPanel();
     }
 
     private void UnlockSteamTitan()
@@ -325,5 +398,25 @@ public class ItemsManager : MonoBehaviour
 
             Debug.Log("Reintento contra el Titán restaurado correctamente.");
         }
+    }
+
+    private void PauseGameForEducationalPanel()
+    {
+        if (!pauseGameWhileEducationalPanelIsOpen)
+            return;
+
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void ResumeGameAfterEducationalPanel()
+    {
+        if (!pauseGameWhileEducationalPanelIsOpen)
+            return;
+
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

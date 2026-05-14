@@ -7,6 +7,8 @@ TagManager:
   - WeakPoint
   - Ground
   - PlayerAttack
+  - Enemigo
+  - BlockedWall
   layers:
   - Default
   - TransparentFX

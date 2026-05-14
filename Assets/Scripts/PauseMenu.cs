@@ -10,6 +10,9 @@ public class PauseMenu : MonoBehaviour
     [Header("Objetos a ocultar durante la pausa")]
     public GameObject[] objectsToHideOnPause;
 
+    [Header("Configuración del cursor")]
+    public bool lockCursorDuringGameplay = true;
+
     private bool isPaused = false;
 
     private void Start()
@@ -20,7 +23,12 @@ public class PauseMenu : MonoBehaviour
         SetObjectsVisibility(true);
 
         Time.timeScale = 1f;
-        LockCursor();
+        isPaused = false;
+
+        if (lockCursorDuringGameplay)
+            LockCursor();
+        else
+            UnlockCursor();
     }
 
     private void Update()
@@ -35,6 +43,10 @@ public class PauseMenu : MonoBehaviour
             else
                 Pause();
         }
+
+        // Seguridad extra: mientras esté pausado, mantener el cursor visible.
+        if (isPaused)
+            UnlockCursor();
     }
 
     public void Resume()
@@ -47,7 +59,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
 
-        LockCursor();
+        if (lockCursorDuringGameplay)
+            LockCursor();
+        else
+            UnlockCursor();
     }
 
     public void Pause()
@@ -66,12 +81,15 @@ public class PauseMenu : MonoBehaviour
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
+        UnlockCursor();
         SceneManager.LoadScene("PLAY HUD");
     }
 
     public void QuitGame()
     {
         Time.timeScale = 1f;
+        UnlockCursor();
+
         Application.Quit();
 
 #if UNITY_EDITOR
