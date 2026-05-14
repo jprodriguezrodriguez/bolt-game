@@ -19492,7 +19492,7 @@ MonoBehaviour:
   multiplicadorPuntoDebil: 4
   "da\xF1oAtaque": 15
   barreraSiguienteNivel: {fileID: 0}
-  portalSiguienteNivel: {fileID: 0}
+  portalSiguienteNivel: {fileID: 784998886}
   animator: {fileID: 0}
 --- !u!136 &422863797
 CapsuleCollider:
@@ -35210,7 +35210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdfd33d01397374aa24f6c0e84fe3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoltPunchHitbox
-  "da\xF1o": 100
+  "da\xF1o": 25
   "puedeHacerDa\xF1o": 1
 --- !u!65 &574556941
 BoxCollider:
@@ -41758,6 +41758,105 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d17bc9c1cdef1c5448255edad31c1c61, type: 3}
+--- !u!1001 &747669983
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 784998889}
+    m_Modifications:
+    - target: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_Name
+      value: PortalToLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6923693691316303551, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 747669986}
+  m_SourcePrefab: {fileID: 100100000, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+--- !u!4 &747669984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+  m_PrefabInstance: {fileID: 747669983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &747669985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6923693691316303551, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+  m_PrefabInstance: {fileID: 747669983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &747669986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747669985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1001 &749778972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42082,6 +42181,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2eb17f175564e84c8ad78ac03232e29, type: 3}
+--- !u!1 &784998886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 784998889}
+  - component: {fileID: 784998888}
+  - component: {fileID: 784998887}
+  m_Layer: 0
+  m_Name: PortalTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &784998887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784998886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8241ff33ff3f726439efc1c97df03ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PortalTeleport
+  playerTag: Player
+  sceneName: Nivel 4 - Verificacion
+--- !u!65 &784998888
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784998886}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8662338, y: 4.657775, z: 3.1627045}
+  m_Center: {x: -0.14410019, y: 1.8288875, z: 0.010353088}
+--- !u!4 &784998889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784998886}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7020836, z: -0, w: 0.7120946}
+  m_LocalPosition: {x: -162.58, y: 0.13, z: 14.22}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 747669984}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.189, z: 0}
 --- !u!1 &813632468
 GameObject:
   m_ObjectHideFlags: 0
@@ -42514,7 +42682,7 @@ MonoBehaviour:
   itemsManager: {fileID: 1662906566}
   itemTitle: 
   educationalText: 
-  educationalPanelSprite: {fileID: 21300000, guid: 2f33a30eb7bf9c2438ca81dcd939291a, type: 3}
+  educationalPanelSprite: {fileID: 21300000, guid: 28a23f1541372634a8d6dbd2334282e1, type: 3}
   playerTag: Player
   visualObject: {fileID: 842860006}
   userGuideParticles: {fileID: 1642874397}
@@ -82009,7 +82177,7 @@ MonoBehaviour:
   itemsManager: {fileID: 1662906566}
   itemTitle: 
   educationalText: 
-  educationalPanelSprite: {fileID: 0}
+  educationalPanelSprite: {fileID: 21300000, guid: 27cdbb6b13738dd419d7d3a7c0033f43, type: 3}
   playerTag: Player
   visualObject: {fileID: 1534490982}
   userGuideParticles: {fileID: 335735315}
@@ -87804,7 +87972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a305d5deac3b2748b38f606e5392d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemsManager
-  totalItems: 1
+  totalItems: 3
   educationalTextContainer: {fileID: 1928738393}
   educationalText: {fileID: 571708448}
   educationalPanelImage: {fileID: 1419284591}
@@ -106595,12 +106763,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 1662906566}
-  itemTitle: COBRE
-  educationalText: "El cobre es ampliamente utilizado en cables, circuitos y componentes
-    electr\xF3nicos debido a su alta capacidad para conducir electricidad. En los
-    sistemas digitales, permite transportar energ\xEDa y se\xF1ales el\xE9ctricas
-    entre los diferentes elementos de una m\xE1quina o dispositivo."
-  educationalPanelSprite: {fileID: 0}
+  itemTitle: 
+  educationalText: 
+  educationalPanelSprite: {fileID: 21300000, guid: e07c3168e0d7ec44c82b7e41367958f1, type: 3}
   playerTag: Player
   visualObject: {fileID: 2128276784}
   userGuideParticles: {fileID: 1771465539}
@@ -107131,6 +107296,7 @@ SceneRoots:
   - {fileID: 323868053}
   - {fileID: 47739007}
   - {fileID: 946008430}
+  - {fileID: 784998889}
   - {fileID: 86957323}
   - {fileID: 484202838}
   - {fileID: 1852232104}
