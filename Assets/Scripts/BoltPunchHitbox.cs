@@ -34,7 +34,6 @@ public class BoltPunchHitbox : MonoBehaviour
         {
             titanVapor.RecibirDaño(daño, false);
             yaGolpeoEnEsteAtaque = true;
-
             Debug.Log("BOLT golpeó al Titán de Vapor correctamente.");
             return;
         }
@@ -48,8 +47,21 @@ public class BoltPunchHitbox : MonoBehaviour
         {
             titanElectrico.RecibirDaño(daño, false);
             yaGolpeoEnEsteAtaque = true;
-
             Debug.Log("BOLT golpeó al Titán Eléctrico correctamente.");
+            return;
+        }
+
+        TitanDigital titanDigital = other.GetComponent<TitanDigital>();
+
+        if (titanDigital == null)
+            titanDigital = other.GetComponentInParent<TitanDigital>();
+
+        if (titanDigital != null)
+        {
+            titanDigital.RecibirDaño(daño, false);
+            yaGolpeoEnEsteAtaque = true;
+
+            Debug.Log("BOLT golpeó al Titán Digital correctamente.");
             return;
         }
     }
