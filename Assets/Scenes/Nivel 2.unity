@@ -16714,10 +16714,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 219441226}
-  itemTitle: CORRIENTE
-  educationalText: "La corriente necesita un camino cerrado para fluir. Una fuente,
-    un conductor y un receptor. Sin un circuito completo, la energ\xEDa no puede
-    hacer su trabajo."
+  itemTitle: 
+  educationalText: 
+  educationalPanelSprite: {fileID: 21300000, guid: a3570e54f690ba74aa4c4fe360c21844, type: 3}
   playerTag: Player
   visualObject: {fileID: 187810868}
   userGuideParticles: {fileID: 416648468}
@@ -17054,6 +17053,7 @@ MonoBehaviour:
   totalItems: 3
   educationalTextContainer: {fileID: 1542146710}
   educationalText: {fileID: 82775237}
+  educationalPanelImage: {fileID: 0}
   educationalMessageDuration: 5
   missionTextContainer: {fileID: 1928298184}
   missionText: {fileID: 1304736101}
@@ -17066,6 +17066,8 @@ MonoBehaviour:
   initialMissionDuration: 4
   initialMissionMessage: "<b>MISI\xD3N INICIAL</b>\nBusca las 3 pistas para avanzar"
   itemsCounterText: {fileID: 499771258}
+  collectMissionText: Recolecta las pistas
+  defeatTitanText: "Derrota al Tit\xE1n de Vapor"
   steamTitan: {fileID: 1244403264}
   steamEffect: {fileID: 6813416509558619124, guid: 3b7f2c753d435d647a80f1f047a113e3, type: 3}
   steamTitanAnimator: {fileID: 0}
@@ -17078,6 +17080,8 @@ MonoBehaviour:
   titanGuideHintText: {fileID: 1839584597}
   titanGuideHintImage: {fileID: 1014207936}
   titanParticlesGuideSprite: {fileID: 21300000, guid: dbfb6af2c01d34c4eafe0fe0a12e6efa, type: 3}
+  hintBackgroundImage: {fileID: 0}
+  titanHintBackgroundSprite: {fileID: 0}
   titanGuideMessage: "Sigue las part\xEDculas para encontrar al Tit\xE1n"
   guideToTitan: {fileID: 2001951840}
   retryTitanUnlockedKey: RetryWithElectricTitanUnlocked
@@ -61179,10 +61183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 219441226}
-  itemTitle: ELECTRICIDAD
-  educationalText: "La electricidad siempre estuvo ah\xED. En los rayos, en el \xE1mbar,
-    en la naturaleza. Franklin, Volta y Faraday la domaron para convertirla en energ\xEDa
-    \xFAtil para la humanidad."
+  itemTitle: 
+  educationalText: 
+  educationalPanelSprite: {fileID: 21300000, guid: 55bc063171e08ee4595ba91f3a133ab8, type: 3}
   playerTag: Player
   visualObject: {fileID: 0}
   userGuideParticles: {fileID: 0}
@@ -157207,10 +157210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 219441226}
-  itemTitle: TESLA Y EDISON
-  educationalText: "Tesla y Edison se enfrentaron en la \"Guerra de las Corrientes\".
-    Finalmente, la corriente alterna de Tesla gan\xF3 por ser m\xE1s eficiente a
-    largas distancias."
+  itemTitle: 
+  educationalText: 
+  educationalPanelSprite: {fileID: 21300000, guid: 672490c7a1797b548b25a517a9979f3e, type: 3}
   playerTag: Player
   visualObject: {fileID: 2005353939}
   userGuideParticles: {fileID: 1657071285}

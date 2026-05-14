@@ -7,6 +7,8 @@ TagManager:
   - WeakPoint
   - Ground
   - PlayerAttack
+  - Enemigo
+  - Pared
   layers:
   - Default
   - TransparentFX
