@@ -22,6 +22,20 @@ public class GameOverManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    private void Update()
+    {
+        if (gameOverActive)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public bool IsGameOverActive()
+    {
+        return gameOverActive;
+    }
+
     public void ShowGameOver()
     {
         if (gameOverActive)
@@ -40,6 +54,9 @@ public class GameOverManager : MonoBehaviour
             gameOverPanel.SetActive(true);
 
         Time.timeScale = 0f;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Retry()
@@ -47,12 +64,20 @@ public class GameOverManager : MonoBehaviour
         Debug.Log("BOTÓN REINTENTAR PRESIONADO");
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ExitGame()
     {
         Time.timeScale = 1f;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         SceneManager.LoadScene("PLAY HUD");
     }
 }

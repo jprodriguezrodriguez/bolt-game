@@ -9,6 +9,7 @@ TagManager:
   - PlayerAttack
   - Enemigo
   - Pared
+  - BlockedWall
   layers:
   - Default
   - TransparentFX
