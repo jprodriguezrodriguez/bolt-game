@@ -17,6 +17,9 @@ public class ItemsManager : MonoBehaviour
     public float educationalMessageDuration = 10f;
     public bool pauseGameWhileEducationalPanelIsOpen = true;
 
+    [Header("UI a ocultar durante el panel educativo")]
+    public GameObject[] objectsToHideWhileEducationalPanel;
+
     [Header("Mission UI")]
     public GameObject missionTextContainer;
     public TextMeshProUGUI missionText;
@@ -69,21 +72,21 @@ public class ItemsManager : MonoBehaviour
     public string retryTitanUnlockedKey = "RetryWithTitanUnlocked";
 
     private Coroutine combatHintCoroutine;
-
     private Coroutine educationalCoroutine;
     private Coroutine missionCoroutine;
 
-    void Start()
+    private void Start()
     {
         Debug.Log("ItemsManager inició.");
-
-        UpdateCounterUI();
 
         if (educationalTextContainer != null)
             educationalTextContainer.SetActive(false);
 
         if (missionTextContainer != null)
             missionTextContainer.SetActive(false);
+
+        if (initialMissionTextContainer != null)
+            initialMissionTextContainer.SetActive(false);
 
         if (missionText != null)
             missionText.gameObject.SetActive(true);
@@ -94,104 +97,44 @@ public class ItemsManager : MonoBehaviour
         if (steamEffect != null)
             steamEffect.SetActive(false);
 
+        if (guideToTitan != null)
+            guideToTitan.SetActive(false);
+
+        RestoreTitanRetryState();
+
+        UpdateCounterUI();
+
         if (showInitialMissionOnStart && !titanUnlocked)
         {
             ShowMissionMessage(initialMissionMessage, initialMissionDuration);
         }
-        if (guideToTitan != null)
-            guideToTitan.SetActive(false);
     }
 
     public void AddItem(string itemTitle, string itemEducationalText, Sprite educationalPanelSprite = null)
     {
+        if (titanUnlocked)
+            return;
+
         collectedItems++;
         Debug.Log("Ítem recolectado. Total: " + collectedItems + " / " + totalItems);
 
         bool completedMission = collectedItems >= totalItems;
 
-        if (!titanUnlocked && completedMission)
-        {
-            if (educationalCoroutine != null)
-                StopCoroutine(educationalCoroutine);
+        if (educationalCoroutine != null)
+            StopCoroutine(educationalCoroutine);
 
+        if (completedMission)
+        {
             educationalCoroutine = StartCoroutine(
                 ShowFinalEducationalThenMissionCoroutine(itemTitle, itemEducationalText, educationalPanelSprite)
             );
         }
-        else if (!titanUnlocked)
+        else
         {
             ShowEducationalMessage(itemTitle, itemEducationalText, educationalPanelSprite);
         }
 
         UpdateCounterUI();
-    }
-
-    private IEnumerator ShowFinalEducationalThenMissionCoroutine(string title, string message, Sprite panelSprite = null)
-    {
-        if (educationalTextContainer != null)
-        {
-            educationalTextContainer.SetActive(true);
-
-            if (educationalPanelImage != null && panelSprite != null)
-            {
-                educationalPanelImage.sprite = panelSprite;
-                educationalPanelImage.preserveAspect = true;
-                educationalPanelImage.color = Color.white;
-                educationalPanelImage.enabled = true;
-            }
-
-            if (educationalText != null)
-            {
-                if (string.IsNullOrWhiteSpace(title) && string.IsNullOrWhiteSpace(message))
-                {
-                    educationalText.gameObject.SetActive(false);
-                }
-                else
-                {
-                    educationalText.gameObject.SetActive(true);
-                    educationalText.text = "<b>" + title + "</b>\n" + message;
-                }
-            }
-
-            PauseGameForEducationalPanel();
-
-            float remainingTime = educationalMessageDuration;
-
-            while (remainingTime > 0f)
-            {
-                if (educationalCountdownText != null)
-                {
-                    educationalCountdownText.gameObject.SetActive(true);
-                    educationalCountdownText.text = "Cierra en " + Mathf.CeilToInt(remainingTime) + "s";
-                }
-
-                remainingTime -= Time.unscaledDeltaTime;
-                yield return null;
-            }
-
-            if (educationalCountdownText != null)
-                educationalCountdownText.gameObject.SetActive(false);
-
-            educationalTextContainer.SetActive(false);
-
-            ResumeGameAfterEducationalPanel();
-        }
-
-        UnlockSteamTitan();
-    }
-
-    private void UpdateCounterUI()
-    {
-        if (itemsCounterText == null) return;
-
-        if (!titanUnlocked)
-        {
-            itemsCounterText.text = collectMissionText + "\n" + collectedItems + " / " + totalItems;
-        }
-        else
-        {
-            itemsCounterText.text = defeatTitanText;
-        }
     }
 
     private void ShowEducationalMessage(string title, string message, Sprite panelSprite = null)
@@ -212,10 +155,51 @@ public class ItemsManager : MonoBehaviour
 
     private IEnumerator ShowEducationalMessageCoroutine(string title, string message, Sprite panelSprite = null)
     {
+        OpenEducationalPanel(title, message, panelSprite);
+
+        float remainingTime = educationalMessageDuration;
+
+        while (remainingTime > 0f)
+        {
+            UpdateEducationalCountdown(remainingTime);
+
+            remainingTime -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        CloseEducationalPanel();
+    }
+
+    private IEnumerator ShowFinalEducationalThenMissionCoroutine(string title, string message, Sprite panelSprite = null)
+    {
+        OpenEducationalPanel(title, message, panelSprite);
+
+        float remainingTime = educationalMessageDuration;
+
+        while (remainingTime > 0f)
+        {
+            UpdateEducationalCountdown(remainingTime);
+
+            remainingTime -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        CloseEducationalPanel();
+
+        UnlockSteamTitan();
+    }
+
+    private void OpenEducationalPanel(string title, string message, Sprite panelSprite = null)
+    {
         if (educationalTextContainer == null)
-            yield break;
+            return;
 
         educationalTextContainer.SetActive(true);
+
+        // Esto manda el panel al frente del Canvas.
+        educationalTextContainer.transform.SetAsLastSibling();
+
+        SetEducationalHiddenObjects(false);
 
         if (educationalPanelImage != null && panelSprite != null)
         {
@@ -238,35 +222,65 @@ public class ItemsManager : MonoBehaviour
             }
         }
 
+        if (educationalCountdownText != null)
+            educationalCountdownText.gameObject.SetActive(true);
+
         PauseGameForEducationalPanel();
+    }
 
-        float remainingTime = educationalMessageDuration;
-
-        while (remainingTime > 0f)
-        {
-            if (educationalCountdownText != null)
-            {
-                educationalCountdownText.gameObject.SetActive(true);
-                educationalCountdownText.text = "Cierra en " + Mathf.CeilToInt(remainingTime) + "s";
-            }
-
-            remainingTime -= Time.unscaledDeltaTime;
-            yield return null;
-        }
-
+    private void CloseEducationalPanel()
+    {
         if (educationalCountdownText != null)
             educationalCountdownText.gameObject.SetActive(false);
 
-        educationalTextContainer.SetActive(false);
+        if (educationalTextContainer != null)
+            educationalTextContainer.SetActive(false);
+
+        SetEducationalHiddenObjects(true);
 
         ResumeGameAfterEducationalPanel();
+    }
+
+    private void UpdateEducationalCountdown(float remainingTime)
+    {
+        if (educationalCountdownText != null)
+        {
+            educationalCountdownText.text = "Cierra en " + Mathf.CeilToInt(remainingTime) + "s";
+        }
+    }
+
+    private void SetEducationalHiddenObjects(bool visible)
+    {
+        if (objectsToHideWhileEducationalPanel == null)
+            return;
+
+        foreach (GameObject obj in objectsToHideWhileEducationalPanel)
+        {
+            if (obj != null)
+                obj.SetActive(visible);
+        }
+    }
+
+    private void UpdateCounterUI()
+    {
+        if (itemsCounterText == null)
+            return;
+
+        if (!titanUnlocked)
+        {
+            itemsCounterText.text = collectMissionText + "\n" + collectedItems + " / " + totalItems;
+        }
+        else
+        {
+            itemsCounterText.text = defeatTitanText;
+        }
     }
 
     private void UnlockSteamTitan()
     {
         titanUnlocked = true;
 
-        Debug.Log("Ahora puedes enfrentar al Titán de Vapor");
+        Debug.Log("Ahora puedes enfrentar al Titán.");
 
         if (steamTitan != null)
             steamTitan.SetActive(true);
@@ -282,14 +296,13 @@ public class ItemsManager : MonoBehaviour
         ShowMissionMessage(missionCompletedMessage, missionMessageDuration);
         ShowCombatHint();
         UpdateTitanGuideHint();
-
     }
 
     private void ShowMissionMessage(string message, float duration)
     {
-        if (missionTextContainer == null || missionText == null)
+        if (initialMissionTextContainer == null || initialMissionText == null)
         {
-            Debug.LogWarning("No se asignó la UI del mensaje de misión.");
+            Debug.LogWarning("No se asignó la UI del mensaje de misión inicial.");
             return;
         }
 
@@ -305,13 +318,9 @@ public class ItemsManager : MonoBehaviour
 
         initialMissionTextContainer.SetActive(true);
 
-        if (initialMissionText != null)
-        {
-            initialMissionText.gameObject.SetActive(true);
-            initialMissionText.text = message;
-        }
+        initialMissionText.gameObject.SetActive(true);
+        initialMissionText.text = message;
 
-        yield return null;
         yield return new WaitForSeconds(duration);
 
         initialMissionTextContainer.SetActive(false);
@@ -392,8 +401,6 @@ public class ItemsManager : MonoBehaviour
                 guideToTitan.SetActive(true);
 
             UpdateCounterUI();
-
-            // Solo si ya agregaste este método para cambiar texto/imagen guía
             UpdateTitanGuideHint();
 
             Debug.Log("Reintento contra el Titán restaurado correctamente.");
@@ -406,6 +413,7 @@ public class ItemsManager : MonoBehaviour
             return;
 
         Time.timeScale = 0f;
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -416,6 +424,7 @@ public class ItemsManager : MonoBehaviour
             return;
 
         Time.timeScale = 1f;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
