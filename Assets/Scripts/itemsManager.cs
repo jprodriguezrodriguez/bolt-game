@@ -69,6 +69,7 @@ public class ItemsManager : MonoBehaviour
     public GameObject guideToTitan;
 
     [Header("Retry Settings")]
+    public bool useRetryTitanState = false;
     public string retryTitanUnlockedKey = "RetryWithTitanUnlocked";
 
     private Coroutine combatHintCoroutine;
@@ -100,7 +101,10 @@ public class ItemsManager : MonoBehaviour
         if (guideToTitan != null)
             guideToTitan.SetActive(false);
 
-        RestoreTitanRetryState();
+        if (useRetryTitanState)
+        {
+            RestoreTitanRetryState();
+        }
 
         UpdateCounterUI();
 

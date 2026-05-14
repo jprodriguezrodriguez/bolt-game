@@ -5320,7 +5320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 194191377}
   m_Layer: 0
-  m_Name: EducationalPanelManager
+  m_Name: EducationalPanelManager01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28917,6 +28917,7 @@ MonoBehaviour:
   educationalCountdownText: {fileID: 2123378505}
   educationalMessageDuration: 8
   pauseGameWhileEducationalPanelIsOpen: 1
+  objectsToHideWhileEducationalPanel: []
   missionTextContainer: {fileID: 473009494}
   missionText: {fileID: 1600905096}
   missionMessageDuration: 5
@@ -28927,7 +28928,7 @@ MonoBehaviour:
   showInitialMissionOnStart: 1
   initialMissionDuration: 4
   initialMissionMessage: "<b>MISI\xD3N INICIAL</b>\nBusca las 3 pistas para avanzar"
-  itemsCounterText: {fileID: 0}
+  itemsCounterText: {fileID: 1796411628}
   collectMissionText: Recolecta las pistas
   defeatTitanText: "Derrota al Tit\xE1n de Vapor"
   steamTitan: {fileID: 1872374149}
@@ -64305,7 +64306,7 @@ Transform:
   m_GameObject: {fileID: 1441540873}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.027600002, y: 10.34, z: 0.17752}
+  m_LocalPosition: {x: 0.027600002, y: 10.496, z: 0.17752}
   m_LocalScale: {x: 0.002, y: 1, z: 0.002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66123,7 +66124,7 @@ MonoBehaviour:
   itemsManager: {fileID: 853420286}
   itemTitle: 
   educationalText: 
-  educationalPanelSprite: {fileID: 21300000, guid: 45002bc0850b0e64eb1c2c6864937c3e, type: 3}
+  educationalPanelSprite: {fileID: 21300000, guid: d5454ddf80f61bb488c7ab369f03da44, type: 3}
   playerTag: Player
   visualObject: {fileID: 0}
   userGuideParticles: {fileID: 0}
@@ -66852,6 +66853,7 @@ GameObject:
   - component: {fileID: 1504667189}
   - component: {fileID: 1504667190}
   - component: {fileID: 1504667191}
+  - component: {fileID: 1504667192}
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -66938,11 +66940,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ca22711e841204ea0c101db6570756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bolt
-  speed: 8
+  speed: 12
   rotationSpeed: 120
   runningSpeed: 15
   jumpForce: 10
-  collisionBlocker: {fileID: 0}
+  collisionBlocker: {fileID: 1504667192}
 --- !u!114 &1504667189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66956,10 +66958,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoltStats
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 1000
   maxEnergy: 100
   currentEnergy: 100
-  energyDrainPerSecond: 5
+  energyDrainPerSecond: 0.5
   energyRecoveryPerSecond: 0
   healthBarUI: {fileID: 1604012284}
   energyBarUI: {fileID: 1574420697}
@@ -67002,6 +67004,20 @@ MonoBehaviour:
   attackDuration: 0.8
   hitboxStartTime: 0.25
   hitboxActiveTime: 0.25
+--- !u!114 &1504667192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504667184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1cd78839c2d954f845b72b72f3cfe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisionBlocker
+  blockingTag: BlockedWall
+  isBlocked: 0
 --- !u!1 &1514371032
 GameObject:
   m_ObjectHideFlags: 0
@@ -82491,11 +82507,11 @@ RectTransform:
   m_Children:
   - {fileID: 1816897920}
   - {fileID: 1970532699}
-  - {fileID: 194191377}
   - {fileID: 473009495}
   - {fileID: 926691695}
   - {fileID: 466406124}
   - {fileID: 1339034506}
+  - {fileID: 194191377}
   - {fileID: 631194069}
   m_Father: {fileID: 675269244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

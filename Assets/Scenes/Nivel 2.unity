@@ -140116,7 +140116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitanElectricoHealthBar
   titan: {fileID: 1244403271}
-  itemsManager: {fileID: 0}
+  itemsManager: {fileID: 692419808}
   healthBarContainer: {fileID: 1887377306}
   healthBarFill: {fileID: 1676600690}
   healthText: {fileID: 1944287815}
