@@ -51172,8 +51172,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.000003, y: 3, z: 3.0000012}
-  m_Center: {x: 0.0000014305112, y: -9.926167e-24, z: -1.4210855e-14}
+  m_Size: {x: 8.335792, y: 3, z: 3.1929257}
+  m_Center: {x: -0.16789481, y: 0.0000000037883385, z: -0.09646253}
 --- !u!65 &1100241142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51193,8 +51193,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.000003, y: 3, z: 3.0000012}
-  m_Center: {x: 0.0000014305112, y: -9.926167e-24, z: -1.4210855e-14}
+  m_Size: {x: 8.000003, y: 3, z: 3.1005795}
+  m_Center: {x: 0.0000014335968, y: -0.000000001210084, z: -0.050289087}
 --- !u!1 &1100261229
 GameObject:
   m_ObjectHideFlags: 0
@@ -62551,7 +62551,7 @@ MonoBehaviour:
   itemsManager: {fileID: 853420286}
   itemTitle: 
   educationalText: 
-  educationalPanelSprite: {fileID: 21300000, guid: 2f33a30eb7bf9c2438ca81dcd939291a, type: 3}
+  educationalPanelSprite: {fileID: 21300000, guid: 93378a0bd1aa5b3489aa1086e8739464, type: 3}
   playerTag: Player
   visualObject: {fileID: 0}
   userGuideParticles: {fileID: 0}
@@ -64337,9 +64337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 853420286}
-  itemTitle: "CARB\xD3N"
+  itemTitle: 
   educationalText: 
-  educationalPanelSprite: {fileID: 21300000, guid: 2f33a30eb7bf9c2438ca81dcd939291a, type: 3}
+  educationalPanelSprite: {fileID: 21300000, guid: bbaf7977b6dde9f4497d7109f242f4d3, type: 3}
   playerTag: Player
   visualObject: {fileID: 0}
   userGuideParticles: {fileID: 0}
@@ -66883,7 +66883,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!136 &1504667186
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -66903,10 +66903,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.56771594
-  m_Height: 1.7153218
+  m_Radius: 0.6191217
+  m_Height: 1.7754847
   m_Direction: 1
-  m_Center: {x: 7.268974e-16, y: 0.88960946, z: -0.55115074}
+  m_Center: {x: -3.621913e-18, y: 0.9196909, z: -0.499745}
 --- !u!4 &1504667187
 Transform:
   m_ObjectHideFlags: 0
@@ -82341,8 +82341,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.000002, y: 6.0435877, z: 3.0000007}
-  m_Center: {x: -0.00003366861, y: 1.5217943, z: -0.0000003240575}
+  m_Size: {x: 8.000002, y: 6.0435877, z: 3.246726}
+  m_Center: {x: -0.00003366849, y: 1.5217943, z: 0.123362385}
 --- !u!1 &1683736979
 GameObject:
   m_ObjectHideFlags: 0
@@ -83355,6 +83355,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 906cb63206bb18846a544a86e92c9a97, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1719553967}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 906cb63206bb18846a544a86e92c9a97, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1719553970}
   m_SourcePrefab: {fileID: 100100000, guid: 906cb63206bb18846a544a86e92c9a97, type: 3}
 --- !u!4 &1719553965 stripped
 Transform:
@@ -83385,8 +83388,30 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 37.533936, y: 10.666195, z: 21.471317}
-  m_Center: {x: -1.0190952, y: 5.3336277, z: 0.96592313}
+  m_Size: {x: 37.90004, y: 12.972853, z: 21.640484}
+  m_Center: {x: -1.2021478, y: 4.180299, z: 0.8813151}
+--- !u!64 &1719553970
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719553966}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 906cb63206bb18846a544a86e92c9a97, type: 3}
 --- !u!1 &1721213933
 GameObject:
   m_ObjectHideFlags: 0

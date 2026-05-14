@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - PlayerAttack
   - Enemigo
+  - Pared
   - BlockedWall
   layers:
   - Default
