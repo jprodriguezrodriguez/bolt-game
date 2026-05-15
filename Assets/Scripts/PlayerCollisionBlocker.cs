@@ -3,22 +3,32 @@ using UnityEngine;
 public class PlayerCollisionBlocker : MonoBehaviour
 {
     [Header("Collision Settings")]
-    public string blockingTag = "Wall";
+    public string blockingTag = "BlockedWall";
 
     public bool isBlocked = false;
 
+    private int blockingContacts = 0;
+
+    private bool IsBlockingCollision(Collision collision)
+    {
+        return collision.gameObject.CompareTag(blockingTag) ||
+               collision.transform.root.CompareTag(blockingTag);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(blockingTag))
+        if (IsBlockingCollision(collision))
         {
+            blockingContacts++;
             isBlocked = true;
-            Debug.Log("BOLT chocó con una pared. Movimiento bloqueado.");
+
+            Debug.Log("BOLT chocó con una pared. Contactos: " + blockingContacts);
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag(blockingTag))
+        if (IsBlockingCollision(collision))
         {
             isBlocked = true;
         }
@@ -26,10 +36,12 @@ public class PlayerCollisionBlocker : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag(blockingTag))
+        if (IsBlockingCollision(collision))
         {
-            isBlocked = false;
-            Debug.Log("BOLT dejó de tocar la pared. Movimiento desbloqueado.");
+            blockingContacts = Mathf.Max(0, blockingContacts - 1);
+            isBlocked = blockingContacts > 0;
+
+            Debug.Log("BOLT dejó una pared. Contactos restantes: " + blockingContacts);
         }
     }
 }
