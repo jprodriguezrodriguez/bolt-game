@@ -8,11 +8,19 @@ public class ElectricDrone : MonoBehaviour
     public string playerTag = "Player";
     public float attackRange = 8f;
 
+    [Header("Movement")]
+    public bool followPlayer = true;
+    public float followRange = 15f;
+    public float stopDistance = 4f;
+    public float moveSpeed = 3f;
+    public float rotationSpeed = 5f;
+    public Transform detectionCenter;
+
     [Header("Attack")]
     public float chargeTime = 1.2f;
     public float attackCooldown = 2f;
-    public int normalDamage = 2;
-    public int coveredDamage = 1;
+    public int normalDamage = 8;
+    public int coveredDamage = 3;
 
     [Header("Lightning Visual")]
     public Transform attackOrigin;
@@ -41,6 +49,7 @@ public class ElectricDrone : MonoBehaviour
         {
             lightningLine.enabled = false;
             lightningLine.positionCount = segments;
+            lightningLine.useWorldSpace = true;
         }
 
         if (warningTextContainer != null)
@@ -52,15 +61,26 @@ public class ElectricDrone : MonoBehaviour
         {
             chargeEffect.SetActive(false);
         }
+
     }
 
     void Update()
     {
         FindPlayerIfNeeded();
 
-        if (player == null || isAttacking || !canAttack) return;
+        if (player == null)
+            return;
 
-        float distance = Vector3.Distance(transform.position, player.position);
+        Vector3 centerPosition = detectionCenter != null ? detectionCenter.position : transform.position;
+        float distance = Vector3.Distance(centerPosition, player.position);
+
+        if (!isAttacking && canAttack)
+        {
+            FollowPlayer(distance);
+        }
+
+        if (isAttacking || !canAttack)
+            return;
 
         if (distance <= attackRange)
         {
@@ -115,7 +135,7 @@ public class ElectricDrone : MonoBehaviour
         if (player == null || lightningLine == null) yield break;
 
         Vector3 start = attackOrigin != null ? attackOrigin.position : transform.position;
-        Vector3 end = player.position + Vector3.up * 1f;
+        Vector3 end = GetPlayerTargetPoint();
 
         ApplyDamageToPlayer(end);
 
@@ -167,28 +187,74 @@ public class ElectricDrone : MonoBehaviour
 
     void ApplyDamageToPlayer(Vector3 hitPoint)
     {
-        Collider[] hits = Physics.OverlapSphere(hitPoint, 1f);
+        if (player == null)
+            return;
 
-        foreach (Collider hit in hits)
+        PlayerDefense defense = player.GetComponent<PlayerDefense>();
+
+        if (defense == null)
+            defense = player.GetComponentInParent<PlayerDefense>();
+
+        if (defense == null)
+            defense = player.GetComponentInChildren<PlayerDefense>();
+
+        if (defense != null)
         {
-            if (hit.CompareTag(playerTag))
-            {
-                PlayerDefense defense = hit.GetComponent<PlayerDefense>();
-
-                if (defense == null)
-                    defense = hit.GetComponentInParent<PlayerDefense>();
-
-                if (defense != null)
-                {
-                    defense.ApplyExplosionDamage(normalDamage, coveredDamage, transform.position);
-                }
-            }
+            defense.ApplyExplosionDamage(normalDamage, coveredDamage, transform.position);
+            Debug.Log("El dron eléctrico aplicó daño a BOLT.");
         }
+        else
+        {
+            Debug.LogWarning("No se encontró PlayerDefense en BOLT.");
+        }
+    }
+
+    private Vector3 GetPlayerTargetPoint()
+    {
+        Collider playerCollider = player.GetComponent<Collider>();
+
+        if (playerCollider == null)
+            playerCollider = player.GetComponentInChildren<Collider>();
+
+        if (playerCollider != null)
+            return playerCollider.bounds.center;
+
+        return player.position + Vector3.up * 1f;
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+
+        Vector3 centerPosition = detectionCenter != null ? detectionCenter.position : transform.position;
+
+        Gizmos.DrawWireSphere(centerPosition, attackRange);
+    }
+
+    void FollowPlayer(float distance)
+    {
+        if (!followPlayer || player == null)
+            return;
+
+        if (distance > followRange)
+            return;
+
+        if (distance <= stopDistance)
+            return;
+
+        Vector3 direction = player.position - transform.position;
+        direction.y = 0f;
+
+        if (direction == Vector3.zero)
+            return;
+
+        transform.position += direction.normalized * moveSpeed * Time.deltaTime;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
     }
 }
