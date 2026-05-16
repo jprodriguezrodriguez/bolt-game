@@ -36045,7 +36045,7 @@ MonoBehaviour:
   checkpointManager: {fileID: 487625886}
   checkpointRespawnPoint: {fileID: 716127432}
   saveCheckpointOnCollect: 1
-  collectibleId: Material_01
+  collectibleId: TechBoard01
 --- !u!65 &842860009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56958,6 +56958,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348983452}
   m_CullTransparentMesh: 1
+--- !u!1 &1350838517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1350838518}
+  m_Layer: 0
+  m_Name: respawnPoint02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1350838518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350838517}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.523, y: 0, z: -2.944}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2128276786}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1370242753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102164,10 +102195,10 @@ MonoBehaviour:
   visualObject: {fileID: 2128276784}
   userGuideParticles: {fileID: 1771465539}
   finalGuidePoint: {fileID: 0}
-  checkpointManager: {fileID: 0}
-  checkpointRespawnPoint: {fileID: 0}
+  checkpointManager: {fileID: 487625886}
+  checkpointRespawnPoint: {fileID: 1350838518}
   saveCheckpointOnCollect: 1
-  collectibleId: Material_01
+  collectibleId: TechBoard02
 --- !u!4 &2128276786
 Transform:
   m_ObjectHideFlags: 0
@@ -102183,6 +102214,7 @@ Transform:
   m_Children:
   - {fileID: 551068176}
   - {fileID: 1771465542}
+  - {fileID: 1350838518}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -87.5, z: 0}
 --- !u!65 &2128276787
