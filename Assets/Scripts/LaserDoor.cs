@@ -9,6 +9,9 @@ public class LaserDoor : MonoBehaviour
 
     [Header("References")]
     public GameObject laserVisual;
+    public GameObject laserBlocker;
+
+    [Header("Player")]
     public string playerTag = "Player";
 
     private float lastDamageTime = -999f;
@@ -36,6 +39,9 @@ public class LaserDoor : MonoBehaviour
                     stats.TakeDamage(damage);
                     lastDamageTime = Time.time;
 
+                    if (DamageFlashUI.Instance != null)
+                        DamageFlashUI.Instance.ShowDamageFlash();
+
                     Debug.Log("BOLT recibió daño por puerta láser.");
                 }
             }
@@ -52,5 +58,8 @@ public class LaserDoor : MonoBehaviour
     {
         if (laserVisual != null)
             laserVisual.SetActive(isActive);
+
+        if (laserBlocker != null)
+            laserBlocker.SetActive(isActive);
     }
 }
