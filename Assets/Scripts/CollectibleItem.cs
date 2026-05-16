@@ -24,7 +24,34 @@ public class CollectibleItem : MonoBehaviour
     public GameObject userGuideParticles;
     public GameObject finalGuidePoint;
 
+    [Header("Checkpoint")]
+    public CheckpointManager checkpointManager;
+    public Transform checkpointRespawnPoint;
+    public bool saveCheckpointOnCollect = true;
+    public string collectibleId = "Material_01";
+
     private bool collected = false;
+
+    private void Start()
+    {
+        if (checkpointManager == null)
+            checkpointManager = FindObjectOfType<CheckpointManager>();
+
+        if (checkpointManager != null && checkpointManager.IsItemCollected(collectibleId))
+        {
+            collected = true;
+
+            if (visualObject != null)
+                visualObject.SetActive(false);
+            else
+                gameObject.SetActive(false);
+
+            if (userGuideParticles != null)
+                Destroy(userGuideParticles);
+
+            Debug.Log("Material ya estaba recolectado: " + collectibleId);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -39,6 +66,15 @@ public class CollectibleItem : MonoBehaviour
     private void Collect()
     {
         collected = true;
+
+        if (saveCheckpointOnCollect && checkpointManager != null)
+        {
+            Vector3 checkpointPosition = checkpointRespawnPoint != null
+                ? checkpointRespawnPoint.position
+                : transform.position;
+
+            checkpointManager.SaveCollectibleCheckpoint(collectibleId, checkpointPosition);
+        }
 
         if (itemsManager != null)
         {

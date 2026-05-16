@@ -335,6 +335,15 @@ public class ItemsManager : MonoBehaviour
         return collectedItems;
     }
 
+    public void RestoreCollectedItems(int amount)
+    {
+        collectedItems = Mathf.Clamp(amount, 0, totalItems);
+
+        Debug.Log("ItemsManager restauró materiales: " + collectedItems + " / " + totalItems);
+
+        UpdateCounterUI();
+    }
+
     public bool IsTitanUnlocked()
     {
         return titanUnlocked;
