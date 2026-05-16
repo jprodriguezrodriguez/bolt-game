@@ -36,6 +36,10 @@ public class DigitalDrone : MonoBehaviour
     public float hoverAmplitude = 0.15f;
     public float hoverFrequency = 2f;
 
+    [Header("Distancia de seguridad")]
+    public float stopDistance = 5f;
+    private bool isAttacking = false;
+
     [Header("Ataque")]
     public float chargeTime = 0.8f;
     public float attackCooldown = 2f;
@@ -103,14 +107,29 @@ public class DigitalDrone : MonoBehaviour
 
         float distancia = Vector3.Distance(transform.position, jugador.position);
 
-        if (distancia <= followRange)
+        if (distancia <= followRange && distancia > stopDistance && !isAttacking)
         {
             FollowPlayer();
+        }
+        else
+        {
+            LookAtPlayer();
         }
 
         if (distancia <= attackRange && canAttack)
         {
             StartCoroutine(AttackRoutine());
+        }
+    }
+    private void LookAtPlayer()
+    {
+        Vector3 direction = jugador.position - transform.position;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -123,22 +142,23 @@ public class DigitalDrone : MonoBehaviour
 
     private void FollowPlayer()
     {
-        Vector3 targetPosition = new Vector3(jugador.position.x, transform.position.y, jugador.position.z);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
         Vector3 direction = jugador.position - transform.position;
         direction.y = 0f;
 
-        if (direction != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
+        if (direction.magnitude <= stopDistance)
+            return;
+
+        Vector3 moveDirection = direction.normalized;
+
+        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+        LookAtPlayer();
     }
 
     private IEnumerator AttackRoutine()
     {
         canAttack = false;
+        isAttacking = true;
 
         ShowWarning();
 
@@ -160,6 +180,8 @@ public class DigitalDrone : MonoBehaviour
         }
 
         yield return new WaitForSeconds(attackCooldown);
+
+        isAttacking = false;
         canAttack = true;
     }
 
