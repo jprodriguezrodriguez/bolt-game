@@ -39289,6 +39289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ad525e65b20f54797bc3d4a9903302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBarTest
+  barraVida: {fileID: 0}
 --- !u!1 &441122571
 GameObject:
   m_ObjectHideFlags: 0
@@ -129902,6 +129903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ad525e65b20f54797bc3d4a9903302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBarTest
+  barraVida: {fileID: 0}
 --- !u!1001 &1595371915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152147,7 +152149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PortalTeleport
   playerTag: Player
   sceneName: Nivel 3
-  panelCarga: {fileID: 0}
+  panelCarga: {fileID: 74313018}
   barraRelleno: {fileID: 0}
   textoCargando: {fileID: 0}
 --- !u!65 &1863259381
