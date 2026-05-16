@@ -94403,11 +94403,7 @@ MonoBehaviour:
   titanHintBackgroundSprite: {fileID: 21300000, guid: 531e39988863439409d8508921f864f3, type: 3}
   titanGuideMessage: "Sigue las part\xEDculas para encontrar al Tit\xE1n"
   guideToTitan: {fileID: 1852232103}
-<<<<<<< HEAD
-  useRetryTitanState: 1
-=======
   useRetryTitanState: 0
->>>>>>> stage
   retryTitanUnlockedKey: RetryWithDigitalTitanUnlocked
 --- !u!4 &1662906567
 Transform:
