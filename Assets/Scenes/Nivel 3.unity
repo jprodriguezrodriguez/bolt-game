@@ -42229,6 +42229,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PortalTeleport
   playerTag: Player
   sceneName: Nivel 4 - Verificacion
+  panelCarga: {fileID: 0}
+  barraRelleno: {fileID: 0}
+  textoCargando: {fileID: 0}
 --- !u!65 &784998888
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -88031,6 +88034,7 @@ MonoBehaviour:
   educationalCountdownText: {fileID: 1211981813}
   educationalMessageDuration: 8
   pauseGameWhileEducationalPanelIsOpen: 1
+  objectsToHideWhileEducationalPanel: []
   missionTextContainer: {fileID: 1824703202}
   missionText: {fileID: 1482929160}
   missionMessageDuration: 5
@@ -88060,6 +88064,7 @@ MonoBehaviour:
   titanHintBackgroundSprite: {fileID: 21300000, guid: 531e39988863439409d8508921f864f3, type: 3}
   titanGuideMessage: "Sigue las part\xEDculas para encontrar al Tit\xE1n"
   guideToTitan: {fileID: 1852232103}
+  useRetryTitanState: 1
   retryTitanUnlockedKey: RetryWithDigitalTitanUnlocked
 --- !u!4 &1662906567
 Transform:
