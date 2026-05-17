@@ -14752,7 +14752,7 @@ MonoBehaviour:
   itemsManager: {fileID: 853420286}
   defaultRespawnPosition: {x: 0, y: 0, z: 0}
   useCurrentPlayerPositionAsDefault: 1
-  levelStartPoint: {fileID: 0}
+  levelStartPoint: {fileID: 2020925255}
 --- !u!4 &520252436
 Transform:
   m_ObjectHideFlags: 0
