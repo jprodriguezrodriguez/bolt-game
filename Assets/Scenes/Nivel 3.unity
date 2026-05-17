@@ -88277,7 +88277,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1801499736}
-  - component: {fileID: 1801499737}
   - component: {fileID: 1801499738}
   m_Layer: 5
   m_Name: HealthBar
@@ -88307,19 +88306,6 @@ RectTransform:
   m_AnchoredPosition: {x: -853.3, y: 312}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1801499737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801499735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51ad525e65b20f54797bc3d4a9903302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthBarTest
-  barraVida: {fileID: 0}
 --- !u!114 &1801499738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97073,7 +97059,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2070929367}
-  - component: {fileID: 2070929368}
   - component: {fileID: 2070929366}
   m_Layer: 5
   m_Name: EnergyBar
@@ -97116,19 +97101,6 @@ RectTransform:
   m_AnchoredPosition: {x: -853.3, y: 198}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2070929368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070929365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51ad525e65b20f54797bc3d4a9903302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthBarTest
-  barraVida: {fileID: 0}
 --- !u!1 &2071010678
 GameObject:
   m_ObjectHideFlags: 0
