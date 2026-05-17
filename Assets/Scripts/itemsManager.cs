@@ -344,6 +344,11 @@ public class ItemsManager : MonoBehaviour
         UpdateCounterUI();
     }
 
+    public void ShowInitialMissionNow()
+    {
+        ShowMissionMessage(initialMissionMessage, initialMissionDuration);
+    }
+
     public bool IsTitanUnlocked()
     {
         return titanUnlocked;
