@@ -114,7 +114,7 @@ public class ItemsManager : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemTitle, string itemEducationalText, Sprite educationalPanelSprite = null)
+    public void AddItem(Sprite educationalPanelSprite = null)
     {
         if (titanUnlocked)
             return;
@@ -130,18 +130,18 @@ public class ItemsManager : MonoBehaviour
         if (completedMission)
         {
             educationalCoroutine = StartCoroutine(
-                ShowFinalEducationalThenMissionCoroutine(itemTitle, itemEducationalText, educationalPanelSprite)
+                ShowFinalEducationalThenMissionCoroutine(educationalPanelSprite)
             );
         }
         else
         {
-            ShowEducationalMessage(itemTitle, itemEducationalText, educationalPanelSprite);
+            ShowEducationalMessage(educationalPanelSprite);
         }
 
         UpdateCounterUI();
     }
 
-    private void ShowEducationalMessage(string title, string message, Sprite panelSprite = null)
+    private void ShowEducationalMessage(Sprite panelSprite = null)
     {
         if (educationalTextContainer == null)
         {
@@ -153,13 +153,13 @@ public class ItemsManager : MonoBehaviour
             StopCoroutine(educationalCoroutine);
 
         educationalCoroutine = StartCoroutine(
-            ShowEducationalMessageCoroutine(title, message, panelSprite)
+            ShowEducationalMessageCoroutine(panelSprite)
         );
     }
 
-    private IEnumerator ShowEducationalMessageCoroutine(string title, string message, Sprite panelSprite = null)
+    private IEnumerator ShowEducationalMessageCoroutine(Sprite panelSprite = null)
     {
-        OpenEducationalPanel(title, message, panelSprite);
+        OpenEducationalPanel(panelSprite);
 
         float remainingTime = educationalMessageDuration;
 
@@ -174,9 +174,9 @@ public class ItemsManager : MonoBehaviour
         CloseEducationalPanel();
     }
 
-    private IEnumerator ShowFinalEducationalThenMissionCoroutine(string title, string message, Sprite panelSprite = null)
+    private IEnumerator ShowFinalEducationalThenMissionCoroutine(Sprite panelSprite = null)
     {
-        OpenEducationalPanel(title, message, panelSprite);
+        OpenEducationalPanel(panelSprite);
 
         float remainingTime = educationalMessageDuration;
 
@@ -193,7 +193,7 @@ public class ItemsManager : MonoBehaviour
         UnlockSteamTitan();
     }
 
-    private void OpenEducationalPanel(string title, string message, Sprite panelSprite = null)
+    private void OpenEducationalPanel(Sprite panelSprite = null)
     {
         if (educationalTextContainer == null)
             return;
@@ -211,19 +211,6 @@ public class ItemsManager : MonoBehaviour
             educationalPanelImage.preserveAspect = true;
             educationalPanelImage.color = Color.white;
             educationalPanelImage.enabled = true;
-        }
-
-        if (educationalText != null)
-        {
-            if (string.IsNullOrWhiteSpace(title) && string.IsNullOrWhiteSpace(message))
-            {
-                educationalText.gameObject.SetActive(false);
-            }
-            else
-            {
-                educationalText.gameObject.SetActive(true);
-                educationalText.text = "<b>" + title + "</b>\n" + message;
-            }
         }
 
         if (educationalCountdownText != null)
@@ -335,6 +322,28 @@ public class ItemsManager : MonoBehaviour
         return collectedItems;
     }
 
+    public void RestoreCollectedItems(int amount)
+    {
+        collectedItems = Mathf.Clamp(amount, 0, totalItems);
+
+        Debug.Log("ItemsManager restauró materiales: " + collectedItems + " / " + totalItems);
+
+        if (collectedItems >= totalItems)
+        {
+            RestoreTitanUnlockedByProgress();
+        }
+        else
+        {
+            titanUnlocked = false;
+            UpdateCounterUI();
+        }
+    }
+
+    public void ShowInitialMissionNow()
+    {
+        ShowMissionMessage(initialMissionMessage, initialMissionDuration);
+    }
+
     public bool IsTitanUnlocked()
     {
         return titanUnlocked;
@@ -431,5 +440,45 @@ public class ItemsManager : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void RestoreTitanUnlockedByProgress()
+    {
+        titanUnlocked = true;
+
+        Debug.Log("Titán restaurado porque ya se recolectaron los 3 materiales.");
+
+        if (steamTitan != null)
+        {
+            steamTitan.SetActive(true);
+            Debug.Log("Steam Titan activado: " + steamTitan.name);
+        }
+        else
+        {
+            Debug.LogWarning("No se asignó Steam Titan en ItemsManager.");
+        }
+
+        if (steamEffect != null)
+            steamEffect.SetActive(true);
+
+        if (guideToTitan != null)
+            guideToTitan.SetActive(true);
+
+        UpdateCounterUI();
+        UpdateTitanGuideHint();
+        ShowCombatHint();
+    }
+
+    public bool HasCollectedAllItems()
+    {
+        return collectedItems >= totalItems;
+    }
+
+    public void RestoreTitanStateFromProgress()
+    {
+        if (collectedItems >= totalItems)
+        {
+            RestoreTitanUnlockedByProgress();
+        }
     }
 }

@@ -9,6 +9,24 @@ public class BoltPunchHitbox : MonoBehaviour
     public bool puedeHacerDaño = false;
 
     private bool yaGolpeoEnEsteAtaque = false;
+    private Collider hitboxCollider;
+
+    private void Awake()
+    {
+        hitboxCollider = GetComponent<Collider>();
+        DesactivarDaño();
+    }
+
+    private void OnEnable()
+    {
+        DesactivarDaño();
+    }
+
+    private void OnDisable()
+    {
+        puedeHacerDaño = false;
+        yaGolpeoEnEsteAtaque = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,7 +44,6 @@ public class BoltPunchHitbox : MonoBehaviour
             return;
 
         TitanDeVapor titanVapor = other.GetComponent<TitanDeVapor>();
-
         if (titanVapor == null)
             titanVapor = other.GetComponentInParent<TitanDeVapor>();
 
@@ -34,12 +51,13 @@ public class BoltPunchHitbox : MonoBehaviour
         {
             titanVapor.RecibirDaño(daño, false);
             yaGolpeoEnEsteAtaque = true;
+            DesactivarDaño();
+
             Debug.Log("BOLT golpeó al Titán de Vapor correctamente.");
             return;
         }
 
         TitanElectrico titanElectrico = other.GetComponent<TitanElectrico>();
-
         if (titanElectrico == null)
             titanElectrico = other.GetComponentInParent<TitanElectrico>();
 
@@ -47,12 +65,13 @@ public class BoltPunchHitbox : MonoBehaviour
         {
             titanElectrico.RecibirDaño(daño, false);
             yaGolpeoEnEsteAtaque = true;
+            DesactivarDaño();
+
             Debug.Log("BOLT golpeó al Titán Eléctrico correctamente.");
             return;
         }
 
         TitanDigital titanDigital = other.GetComponent<TitanDigital>();
-
         if (titanDigital == null)
             titanDigital = other.GetComponentInParent<TitanDigital>();
 
@@ -60,6 +79,7 @@ public class BoltPunchHitbox : MonoBehaviour
         {
             titanDigital.RecibirDaño(daño, false);
             yaGolpeoEnEsteAtaque = true;
+            DesactivarDaño();
 
             Debug.Log("BOLT golpeó al Titán Digital correctamente.");
             return;
@@ -70,12 +90,21 @@ public class BoltPunchHitbox : MonoBehaviour
     {
         puedeHacerDaño = true;
         yaGolpeoEnEsteAtaque = false;
+
+        if (hitboxCollider != null)
+            hitboxCollider.enabled = true;
+
         Debug.Log("Hitbox de BOLT ACTIVADO");
     }
 
     public void DesactivarDaño()
     {
         puedeHacerDaño = false;
+        yaGolpeoEnEsteAtaque = false;
+
+        if (hitboxCollider != null)
+            hitboxCollider.enabled = false;
+
         Debug.Log("Hitbox de BOLT DESACTIVADO");
     }
 }

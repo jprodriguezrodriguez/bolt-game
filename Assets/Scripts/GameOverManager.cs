@@ -43,7 +43,13 @@ public class GameOverManager : MonoBehaviour
 
         gameOverActive = true;
 
-        bool titanUnlocked = itemsManager != null && itemsManager.IsTitanUnlocked();
+        bool titanUnlocked = false;
+
+        if (itemsManager != null)
+        {
+            titanUnlocked = itemsManager.IsTitanUnlocked() ||
+                            itemsManager.HasCollectedAllItems();
+        }
 
         PlayerPrefs.SetInt(retryTitanUnlockedKey, titanUnlocked ? 1 : 0);
         PlayerPrefs.Save();

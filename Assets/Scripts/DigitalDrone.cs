@@ -243,16 +243,30 @@ public class DigitalDrone : MonoBehaviour
 
     private void ApplyDamage()
     {
+        bool damageApplied = false;
+
         if (playerDefense != null)
         {
             playerDefense.ApplyTitanDamage(normalDamage, coveredDamage, transform.position);
+            damageApplied = true;
         }
         else if (boltStats != null)
         {
             boltStats.TakeDamage(normalDamage);
+            damageApplied = true;
+        }
 
+        if (damageApplied)
+        {
             if (DamageFlashUI.Instance != null)
+            {
                 DamageFlashUI.Instance.ShowDamageFlash();
+                Debug.Log("DamageFlash ejecutado desde DigitalDrone.");
+            }
+            else
+            {
+                Debug.LogWarning("No existe DamageFlashUI.Instance en la escena.");
+            }
         }
     }
 

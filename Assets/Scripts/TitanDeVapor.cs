@@ -68,7 +68,7 @@ public class TitanDeVapor : MonoBehaviour
             Debug.Log("Ataques más rápidos");
             if (ia != null)
             {
-                ia.tiempoEntreAtaques = 2f;
+                ia.tiempoEntreAtaques = 1.5f;
             }
         }
 
@@ -130,6 +130,8 @@ public class TitanDeVapor : MonoBehaviour
 
         // Desaparece el Titán
         Destroy(gameObject, 1.5f);
+        PlayerPrefs.SetInt("Nivel1_Completado", 1);
+        PlayerPrefs.Save();
     }
 
     // Función para verificar si un parámetro existe en el Animator
