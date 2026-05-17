@@ -13,6 +13,9 @@ public class CheckpointManager : MonoBehaviour
     public Vector3 defaultRespawnPosition;
     public bool useCurrentPlayerPositionAsDefault = true;
 
+    [Header("Level Start Checkpoint")]
+    public Transform levelStartPoint;
+
     private string sceneName;
 
     private void Awake()
@@ -31,7 +34,7 @@ public class CheckpointManager : MonoBehaviour
         }
 
         if (itemsManager == null)
-            itemsManager = FindObjectOfType<ItemsManager>();
+            itemsManager = FindFirstObjectByType<ItemsManager>();
 
         if (useCurrentPlayerPositionAsDefault && player != null)
             defaultRespawnPosition = player.position;
@@ -157,6 +160,10 @@ public class CheckpointManager : MonoBehaviour
                 PlayerPrefs.GetFloat(GetPositionZKey())
             );
         }
+        else if (levelStartPoint != null)
+        {
+            respawnPosition = levelStartPoint.position;
+        }
 
         Rigidbody rb = player.GetComponent<Rigidbody>();
 
@@ -198,6 +205,11 @@ public class CheckpointManager : MonoBehaviour
         SaveCheckpoint(checkpointPosition);
 
         Debug.Log("Checkpoint completo guardado para: " + collectibleId + " en " + checkpointPosition);
+    }
+
+    public bool HasCheckpoint()
+    {
+        return PlayerPrefs.GetInt(GetHasCheckpointKey(), 0) == 1;
     }
 
     private string GetHasCheckpointKey()

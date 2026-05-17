@@ -17,9 +17,29 @@ public class BoltPunch : MonoBehaviour
     public float hitboxActiveTime = 0.25f;
 
     private bool isAttacking = false;
+    private bool inputReady = false;
+
+    private void Start()
+    {
+        if (punchHitbox != null)
+            punchHitbox.DesactivarDaño();
+
+        StartCoroutine(EnableInputAfterShortDelay());
+    }
+
+    private void OnDisable()
+    {
+        if (punchHitbox != null)
+            punchHitbox.DesactivarDaño();
+
+        isAttacking = false;
+    }
 
     private void Update()
     {
+        if (!inputReady)
+            return;
+
         if (Mouse.current == null)
             return;
 
@@ -33,7 +53,8 @@ public class BoltPunch : MonoBehaviour
     {
         isAttacking = true;
 
-        animator.SetTrigger("punch");
+        if (animator != null)
+            animator.SetTrigger("punch");
 
         yield return new WaitForSeconds(hitboxStartTime);
 
@@ -45,8 +66,17 @@ public class BoltPunch : MonoBehaviour
         if (punchHitbox != null)
             punchHitbox.DesactivarDaño();
 
-        yield return new WaitForSeconds(attackDuration - hitboxStartTime - hitboxActiveTime);
+        float remainingTime = attackDuration - hitboxStartTime - hitboxActiveTime;
+
+        if (remainingTime > 0f)
+            yield return new WaitForSeconds(remainingTime);
 
         isAttacking = false;
+    }
+
+    private IEnumerator EnableInputAfterShortDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
+        inputReady = true;
     }
 }

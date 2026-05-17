@@ -4,17 +4,40 @@ public class PuntoDebil : MonoBehaviour
 {
     private TitanDeVapor titan;
 
-    void Start()
+    private void Start()
     {
         titan = GetComponentInParent<TitanDeVapor>();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))  // Asume que el golpe del jugador tiene este tag
+        IntentarRecibirGolpe(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        IntentarRecibirGolpe(other);
+    }
+
+    private void IntentarRecibirGolpe(Collider other)
+    {
+        BoltPunchHitbox punchHitbox = other.GetComponent<BoltPunchHitbox>();
+
+        if (punchHitbox == null)
+            punchHitbox = other.GetComponentInParent<BoltPunchHitbox>();
+
+        if (punchHitbox == null)
+            return;
+
+        if (!punchHitbox.puedeHacerDaño)
+            return;
+
+        if (titan != null)
         {
-            float daño = 10f;  // Daño base del golpe básico
-            titan.RecibirDaño(daño, true);  // true = es punto débil
+            titan.RecibirDaño(punchHitbox.daño, true);
+            punchHitbox.DesactivarDaño();
+
+            Debug.Log("BOLT golpeó el punto débil del Titán de Vapor.");
         }
     }
 }

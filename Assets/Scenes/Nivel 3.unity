@@ -788,6 +788,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64b3f36e835346747865afbf6cf62acf, type: 3}
+--- !u!1 &35845978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 35845979}
+  m_Layer: 0
+  m_Name: respawnPoint03_nivel3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &35845979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35845978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.78, y: -0.16, z: -5.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1534490984}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &37031775
 GameObject:
   m_ObjectHideFlags: 0
@@ -25990,7 +26021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5208281913122631383, guid: 52f3fc3181689c6469bcd38e08dfcac3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.266663
+      value: 7.842
       objectReference: {fileID: 0}
     - target: {fileID: 5208281913122631383, guid: 52f3fc3181689c6469bcd38e08dfcac3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25998,7 +26029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5208281913122631383, guid: 52f3fc3181689c6469bcd38e08dfcac3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -119.7129
+      value: -120.011
       objectReference: {fileID: 0}
     - target: {fileID: 5208281913122631383, guid: 52f3fc3181689c6469bcd38e08dfcac3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28907,7 +28938,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714888672}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49328e4afd5da8045a3762c4b260934c, type: 3}
   m_Name: 
@@ -28922,7 +28953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 716127432}
   m_Layer: 0
-  m_Name: respawnPoint01
+  m_Name: respawnPoint01_nivel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35998,7 +36029,7 @@ GameObject:
   - component: {fileID: 842860008}
   - component: {fileID: 842860009}
   m_Layer: 0
-  m_Name: TechBoard01
+  m_Name: TechBoard01_nivel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36035,8 +36066,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 1662906566}
-  itemTitle: 
-  educationalText: 
   educationalPanelSprite: {fileID: 21300000, guid: 28a23f1541372634a8d6dbd2334282e1, type: 3}
   playerTag: Player
   visualObject: {fileID: 842860006}
@@ -36045,7 +36074,7 @@ MonoBehaviour:
   checkpointManager: {fileID: 487625886}
   checkpointRespawnPoint: {fileID: 716127432}
   saveCheckpointOnCollect: 1
-  collectibleId: TechBoard01
+  collectibleId: TechBoard01_nivel3
 --- !u!65 &842860009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56968,7 +56997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1350838518}
   m_Layer: 0
-  m_Name: respawnPoint02
+  m_Name: respawnPoint02_nivel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68959,7 +68988,7 @@ GameObject:
   - component: {fileID: 1534490983}
   - component: {fileID: 1534490985}
   m_Layer: 0
-  m_Name: TechBoard03
+  m_Name: TechBoard03_nivel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68978,17 +69007,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 1662906566}
-  itemTitle: 
-  educationalText: 
   educationalPanelSprite: {fileID: 21300000, guid: 27cdbb6b13738dd419d7d3a7c0033f43, type: 3}
   playerTag: Player
   visualObject: {fileID: 1534490982}
   userGuideParticles: {fileID: 335735315}
   finalGuidePoint: {fileID: 0}
-  checkpointManager: {fileID: 0}
-  checkpointRespawnPoint: {fileID: 0}
+  checkpointManager: {fileID: 487625886}
+  checkpointRespawnPoint: {fileID: 35845979}
   saveCheckpointOnCollect: 1
-  collectibleId: Material_01
+  collectibleId: TechBoard03_nivel3
 --- !u!4 &1534490984
 Transform:
   m_ObjectHideFlags: 0
@@ -69004,6 +69031,7 @@ Transform:
   m_Children:
   - {fileID: 784206213}
   - {fileID: 335735318}
+  - {fileID: 35845979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1534490985
@@ -102169,7 +102197,7 @@ GameObject:
   - component: {fileID: 2128276785}
   - component: {fileID: 2128276787}
   m_Layer: 0
-  m_Name: TechBoard02
+  m_Name: TechBoard02_nivel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102188,8 +102216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   itemsManager: {fileID: 1662906566}
-  itemTitle: 
-  educationalText: 
   educationalPanelSprite: {fileID: 21300000, guid: e07c3168e0d7ec44c82b7e41367958f1, type: 3}
   playerTag: Player
   visualObject: {fileID: 2128276784}
@@ -102198,7 +102224,7 @@ MonoBehaviour:
   checkpointManager: {fileID: 487625886}
   checkpointRespawnPoint: {fileID: 1350838518}
   saveCheckpointOnCollect: 1
-  collectibleId: TechBoard02
+  collectibleId: TechBoard02_nivel3
 --- !u!4 &2128276786
 Transform:
   m_ObjectHideFlags: 0
@@ -102946,7 +102972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4466845599684346743, guid: 30d1a5f97b7f90a449923d346dc23c9c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
