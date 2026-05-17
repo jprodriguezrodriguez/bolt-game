@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using Cinemachine;
+using TMPro;
 
 public class ControlCinematica : MonoBehaviour
 {
@@ -30,6 +31,15 @@ public class ControlCinematica : MonoBehaviour
     [Header("Delay al terminar")]
     public float delayBeforeReturnToPlayer = 1f;
     public float delayBeforeShowingGameplayUI = 2f;
+
+    [Header("Texto introductorio de cinemática")]
+    public GameObject cinematicIntroContainer;
+    public TextMeshProUGUI cinematicIntroText;
+
+    [TextArea(3, 6)]
+    public string cinematicIntroMessage = "BOLT: Evolución tecnológica\n\nPrimera era: Vapor\n\nExplora el escenario y descubre los materiales que impulsaron la producción de energía durante la Primera Revolución Industrial.";
+
+    private bool cinematicRunning = false;
 
     private IEnumerator Start()
     {
@@ -71,12 +81,46 @@ public class ControlCinematica : MonoBehaviour
         director.Play();
     }
 
+    private void Awake()
+    {
+        cinematicRunning = true;
+
+        // Ocultar desde el primer momento posible.
+        SetObjectsActive(objectsToHideDuringCinematic, false, "Awake ocultando durante cinemática");
+        SetObjectsActive(objectsToShowDuringCinematic, true, "Awake mostrando durante cinemática");
+
+        if (cinematicIntroContainer != null)
+            cinematicIntroContainer.SetActive(true);
+
+        if (cinematicIntroText != null)
+            cinematicIntroText.text = cinematicIntroMessage;
+    }
+
+    private void LateUpdate()
+    {
+        if (!cinematicRunning)
+            return;
+
+        // Fuerza el estado durante la cinemática, por si ItemsManager u otro script activa algo.
+        SetObjectsActive(objectsToHideDuringCinematic, false, "Forzando ocultar durante cinemática");
+        SetObjectsActive(objectsToShowDuringCinematic, true, "Forzando mostrar durante cinemática");
+
+        if (cinematicIntroContainer != null && !cinematicIntroContainer.activeSelf)
+            cinematicIntroContainer.SetActive(true);
+    }
+
     private void PrepareCinematicState()
     {
         Debug.Log("Preparando estado de cinemática.");
 
         if (scriptMovimiento != null)
             scriptMovimiento.enabled = false;
+
+        if (cinematicIntroContainer != null)
+            cinematicIntroContainer.SetActive(true);
+
+        if (cinematicIntroText != null)
+            cinematicIntroText.text = cinematicIntroMessage;
 
         camCinematica.Priority = 100;
         camJugador.Priority = 10;
@@ -96,35 +140,31 @@ public class ControlCinematica : MonoBehaviour
 
     private IEnumerator ReturnToPlayerAfterDelay()
     {
-        // 1. Se queda un momento mirando al Titán.
         yield return new WaitForSeconds(delayBeforeReturnToPlayer);
 
         Debug.Log("Cambiando de cinemática a cámara del jugador.");
 
-        // 2. Cambia la cámara, pero todavía NO muestra el HUD.
         camCinematica.Priority = 0;
         camJugador.Priority = 20;
 
-        // 3. Espera a que termine el blend de Cinemachine.
         yield return new WaitForSeconds(delayBeforeShowingGameplayUI);
+        cinematicRunning = false;
 
         Debug.Log("Mostrando UI de gameplay después del blend.");
 
-        // 4. Ahora sí vuelve el control del jugador.
         if (scriptMovimiento != null)
             scriptMovimiento.enabled = true;
 
-        // 5. Ahora sí muestra UI.
         SetObjectsActive(objectsToShowAfterCinematic, true, "Mostrando después de cinemática");
-
-        // 6. Ahora sí oculta el Titán temporal.
         SetObjectsActive(objectsToHideAfterCinematic, false, "Ocultando después de cinemática");
 
-        // 7. Muestra mensaje inicial.
         if (showInitialMissionAfterCinematic && itemsManager != null)
         {
             itemsManager.ShowInitialMissionNow();
         }
+
+        if (cinematicIntroContainer != null)
+            cinematicIntroContainer.SetActive(false);
     }
 
     private void SetObjectsActive(GameObject[] objects, bool active, string actionName)
