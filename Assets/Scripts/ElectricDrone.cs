@@ -39,6 +39,10 @@ public class ElectricDrone : MonoBehaviour
     public TextMeshProUGUI warningText;
     public string warningMessage = "Presiona Q para cubrirte";
 
+    [Header("Audio")]
+    public AudioSource audioSource;       // Componente reproductor de audio
+    public AudioClip lightningSound;      // Archivo de audio del rayo
+
     private Transform player;
     private bool isAttacking = false;
     private bool canAttack = true;
@@ -134,6 +138,12 @@ public class ElectricDrone : MonoBehaviour
     {
         if (player == null || lightningLine == null) yield break;
 
+        // --- REPRODUCCIÓN DEL SONIDO DEL RAYO ---
+        if (audioSource != null && lightningSound != null)
+        {
+            audioSource.PlayOneShot(lightningSound);
+        }
+
         Vector3 start = attackOrigin != null ? attackOrigin.position : transform.position;
         Vector3 end = GetPlayerTargetPoint();
 
@@ -144,6 +154,8 @@ public class ElectricDrone : MonoBehaviour
             GameObject impactInstance = Instantiate(impactEffect, end, Quaternion.identity);
             Destroy(impactInstance, 1.5f);
         }
+
+        
 
         lightningLine.enabled = true;
 

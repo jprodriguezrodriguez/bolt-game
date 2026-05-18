@@ -16,6 +16,10 @@ public class BoltPunch : MonoBehaviour
     public float hitboxStartTime = 0.25f;
     public float hitboxActiveTime = 0.25f;
 
+    [Header("Audio")]
+    public AudioSource audioSource; // El componente que reproduce el sonido
+    public AudioClip punchSound;    // El archivo de sonido del puño
+
     private bool isAttacking = false;
     private bool inputReady = false;
 
@@ -55,6 +59,12 @@ public class BoltPunch : MonoBehaviour
 
         if (animator != null)
             animator.SetTrigger("punch");
+
+        // Sonido de puño
+        if (audioSource != null && punchSound != null)
+        {
+            audioSource.PlayOneShot(punchSound);
+        }
 
         yield return new WaitForSeconds(hitboxStartTime);
 

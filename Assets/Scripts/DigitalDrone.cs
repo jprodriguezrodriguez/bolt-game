@@ -51,6 +51,11 @@ public class DigitalDrone : MonoBehaviour
     [Header("Target")]
     public Transform targetPoint;
 
+    [Header("Audio")]
+    public AudioSource audioSource;       // Componente reproductor de audio
+    public AudioClip laserSound;          // Archivo de audio del láser
+    public AudioClip sphereSound;         // Archivo de audio de la esfera
+
     private Transform jugador;
     private BoltStats boltStats;
     private PlayerDefense playerDefense;
@@ -168,6 +173,12 @@ public class DigitalDrone : MonoBehaviour
         if (jugador == null)
             yield break;
 
+        // --- REPRODUCIR SONIDO DEL LÁSER AQUÍ ---
+        if (audioSource != null && laserSound != null)
+        {
+            audioSource.PlayOneShot(laserSound);
+        }
+
         Vector3 targetPosition = targetPoint != null
             ? targetPoint.position
             : jugador.position + Vector3.up * 1f;
@@ -222,6 +233,12 @@ public class DigitalDrone : MonoBehaviour
         {
             Debug.LogWarning("No se puede lanzar esfera: falta prefab, attackOrigin o jugador.");
             return;
+        }
+
+        // --- REPRODUCIR SONIDO DE LA ESFERA ---
+        if (audioSource != null && sphereSound != null)
+        {
+            audioSource.PlayOneShot(sphereSound);
         }
 
         GameObject sphere = Instantiate(powerSpherePrefab, attackOrigin.position, Quaternion.identity);

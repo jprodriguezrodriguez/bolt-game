@@ -34,6 +34,10 @@ public class SteamBombEnemy : MonoBehaviour
     public TextMeshProUGUI warningText;
     public string warningMessage = "Presiona Q para cubrirte";
 
+    [Header("Audio")]
+    public AudioSource audioSource;       // El componente que emite el sonido
+    public AudioClip explosionSound;      // El archivo de audio de la explosión
+
     private Transform player;
     private bool isExploding = false;
     private Vector3 initialPosition;
@@ -161,6 +165,12 @@ public class SteamBombEnemy : MonoBehaviour
         if (explosionEffect != null)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        }
+
+        // --- REPRODUCCIÓN DEL SONIDO ---
+        if (audioSource != null && explosionSound != null)
+        {
+            audioSource.PlayOneShot(explosionSound);
         }
 
         if (warningTextContainer != null)
