@@ -28,14 +28,22 @@ public class TitanDigital : MonoBehaviour
     public Animator animator;
     private TitanDigitalIA ia;
 
-    private void Start()
+    void Start()
     {
         saludActual = saludMaxima;
-
+        estaMuerto = false;  // ← Asegurar que no está muerto
         ia = GetComponent<TitanDigitalIA>();
 
         if (animator == null)
             animator = GetComponent<Animator>();
+
+        // Forzar animación Idle al inicio
+        if (animator != null)
+        {
+            animator.Play("Idle");
+        }
+
+        Debug.Log($"Titán Digital iniciado con {saludActual} de salud");
     }
 
     public void RecibirDaño(float daño, bool esPuntoDebil)
