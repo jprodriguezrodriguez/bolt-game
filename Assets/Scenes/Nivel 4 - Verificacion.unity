@@ -1215,7 +1215,7 @@ GameObject:
   - component: {fileID: 574630527}
   - component: {fileID: 574630526}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1609,6 +1609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 747197823}
   - component: {fileID: 747197822}
+  - component: {fileID: 747197824}
   m_Layer: 0
   m_Name: gamemanager
   m_TagString: Untagged
@@ -1654,6 +1655,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &747197824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747197821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f35f6c3bb892d346b8eaedd0362de8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelApiInitializer
+  idTema: 4
+  registrarInicioNivel: 1
 --- !u!1 &1034656869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,8 +1680,9 @@ GameObject:
   - component: {fileID: 1034656872}
   - component: {fileID: 1034656871}
   - component: {fileID: 1034656870}
+  - component: {fileID: 1034656873}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: boxDigital
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1724,6 +1740,23 @@ Transform:
   - {fileID: 274083225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1034656873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034656869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 4
+  idLogro: 12
+  usarCheckpoint: 0
+  idCheckpointAsociado: 0
+  puntajeAlRecolectar: 100
 --- !u!1 &1059798546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,7 +1771,7 @@ GameObject:
   - component: {fileID: 1059798548}
   - component: {fileID: 1059798547}
   m_Layer: 0
-  m_Name: Sphere (3)
+  m_Name: materialElectrica
   m_TagString: Prueba3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2302,7 +2335,7 @@ GameObject:
   - component: {fileID: 1591782403}
   - component: {fileID: 1591782402}
   m_Layer: 0
-  m_Name: Sphere (1)
+  m_Name: materialDigital
   m_TagString: Prueba2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2442,7 +2475,7 @@ GameObject:
   - component: {fileID: 1621035451}
   - component: {fileID: 1621035450}
   m_Layer: 0
-  m_Name: Sphere (2)
+  m_Name: materialVapor
   m_TagString: Prueba
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2787,8 +2820,9 @@ GameObject:
   - component: {fileID: 1917945178}
   - component: {fileID: 1917945177}
   - component: {fileID: 1917945176}
+  - component: {fileID: 1917945179}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: boxVapor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2846,6 +2880,23 @@ Transform:
   - {fileID: 516794095}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1917945179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917945175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 4
+  idLogro: 10
+  usarCheckpoint: 0
+  idCheckpointAsociado: 0
+  puntajeAlRecolectar: 100
 --- !u!4 &1989206731 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 74a2c51acac53e244b98c5b3f284bdf0, type: 3}
@@ -2867,8 +2918,9 @@ GameObject:
   - component: {fileID: 2028132742}
   - component: {fileID: 2028132741}
   - component: {fileID: 2028132740}
+  - component: {fileID: 2028132743}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: boxElectrica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2926,6 +2978,23 @@ Transform:
   - {fileID: 433123734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2028132743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028132739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 4
+  idLogro: 11
+  usarCheckpoint: 0
+  idCheckpointAsociado: 0
+  puntajeAlRecolectar: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

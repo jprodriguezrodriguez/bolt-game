@@ -233,7 +233,6 @@ public class ControlCinematica : MonoBehaviour
             if (obj != null)
             {
                 obj.SetActive(active);
-                Debug.Log(actionName + ": " + obj.name + " = " + active);
             }
         }
     }

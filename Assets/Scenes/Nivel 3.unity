@@ -35221,6 +35221,70 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753979811}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &767305728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767305729}
+  - component: {fileID: 767305730}
+  - component: {fileID: 767305731}
+  m_Layer: 0
+  m_Name: LevelStartPoint_N3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &767305729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767305728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &767305730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767305728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 3
+  idCheckpoint: 10
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
+--- !u!114 &767305731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767305728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f35f6c3bb892d346b8eaedd0362de8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelApiInitializer
+  idTema: 3
+  registrarInicioNivel: 1
 --- !u!1001 &770581904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36582,6 +36646,8 @@ GameObject:
   - component: {fileID: 842860007}
   - component: {fileID: 842860008}
   - component: {fileID: 842860009}
+  - component: {fileID: 842860010}
+  - component: {fileID: 842860011}
   m_Layer: 0
   m_Name: TechBoard01_nivel3
   m_TagString: Untagged
@@ -36651,6 +36717,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.73973, z: 1}
   m_Center: {x: 0, y: 0.8619353, z: 0}
+--- !u!114 &842860010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842860006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 3
+  idLogro: 7
+  usarCheckpoint: 1
+  idCheckpointAsociado: 11
+  puntajeAlRecolectar: 100
+--- !u!114 &842860011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842860006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 3
+  idCheckpoint: 11
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
 --- !u!1 &852211977
 GameObject:
   m_ObjectHideFlags: 0
@@ -69861,6 +69961,8 @@ GameObject:
   - component: {fileID: 1534490984}
   - component: {fileID: 1534490983}
   - component: {fileID: 1534490985}
+  - component: {fileID: 1534490986}
+  - component: {fileID: 1534490987}
   m_Layer: 0
   m_Name: TechBoard03_nivel3
   m_TagString: Untagged
@@ -69930,6 +70032,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.1457748, y: 2.554821, z: 2.4168663}
   m_Center: {x: 3.6693535, y: 0.7774105, z: -3.261259}
+--- !u!114 &1534490986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534490982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 3
+  idLogro: 9
+  usarCheckpoint: 1
+  idCheckpointAsociado: 12
+  puntajeAlRecolectar: 100
+--- !u!114 &1534490987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534490982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 3
+  idCheckpoint: 13
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
 --- !u!1001 &1546760000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103840,6 +103976,8 @@ GameObject:
   - component: {fileID: 2128276786}
   - component: {fileID: 2128276785}
   - component: {fileID: 2128276787}
+  - component: {fileID: 2128276788}
+  - component: {fileID: 2128276789}
   m_Layer: 0
   m_Name: TechBoard02_nivel3
   m_TagString: Untagged
@@ -103909,6 +104047,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.7996038, z: 1}
   m_Center: {x: 0, y: 0.9608248, z: 0}
+--- !u!114 &2128276788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128276784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 3
+  idLogro: 8
+  usarCheckpoint: 1
+  idCheckpointAsociado: 12
+  puntajeAlRecolectar: 100
+--- !u!114 &2128276789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128276784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 3
+  idCheckpoint: 12
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
 --- !u!1 &2129477103
 GameObject:
   m_ObjectHideFlags: 0
@@ -104631,7 +104803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986362653476286213, guid: d9a52dd403cb18d43b7b5149aaf6cffd, type: 3}
       propertyPath: wallLayer.m_Bits
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9165272798547095723, guid: d9a52dd403cb18d43b7b5149aaf6cffd, type: 3}
       propertyPath: energyBarUI
@@ -104989,3 +105161,4 @@ SceneRoots:
   - {fileID: 1276869512}
   - {fileID: 1813698896}
   - {fileID: 1603967774}
+  - {fileID: 767305729}

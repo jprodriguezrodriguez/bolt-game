@@ -55,6 +55,9 @@ public class BoltStats : MonoBehaviour
 
             if (gameOverManager != null)
                 gameOverManager.ShowGameOver();
+
+            BoltApiService.Instance.RegistrarMuerte(puntajeActual: 0, vidaActual: currentHealth, energiaActual: currentEnergy
+);
         }
     }
 

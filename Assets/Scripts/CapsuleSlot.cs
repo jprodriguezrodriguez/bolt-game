@@ -14,19 +14,20 @@ public class CapsuleSlot : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-        if (snapPoint == null) snapPoint = this.transform;
+        gameManager = FindFirstObjectByType<GameManager>();
+
+        if (snapPoint == null)
+            snapPoint = this.transform;
     }
 
-    
     public bool TryPlaceObject(GameObject obj)
     {
-        
         if (!isOccupied && obj.CompareTag(requiredTag))
         {
             PlaceObject(obj);
             return true;
         }
+
         return false;
     }
 
@@ -36,9 +37,12 @@ public class CapsuleSlot : MonoBehaviour
         placedObject = obj;
 
         Rigidbody rb = obj.GetComponent<Rigidbody>();
-        rb.useGravity = false;
-        rb.isKinematic = true;
 
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
 
         obj.transform.SetParent(this.transform);
         obj.transform.position = snapPoint.position;
@@ -46,7 +50,18 @@ public class CapsuleSlot : MonoBehaviour
 
         Debug.Log($"Cápsula '{requiredTag}' colocada correctamente en {gameObject.name}");
 
-  
+        // Registrar logro / evento en la API cuando el material fue ubicado correctamente
+        ApiCollectableReporter apiReporter = obj.GetComponent<ApiCollectableReporter>();
+
+        if (apiReporter != null)
+        {
+            apiReporter.RegistrarRecoleccion();
+        }
+        else
+        {
+            Debug.LogWarning($"El objeto {obj.name} no tiene ApiCollectableReporter.");
+        }
+
         gameManager?.CheckWinCondition();
     }
 
@@ -55,12 +70,18 @@ public class CapsuleSlot : MonoBehaviour
         if (!isOccupied) return null;
 
         isOccupied = false;
+
         GameObject obj = placedObject;
         placedObject = null;
 
         Rigidbody rb = obj.GetComponent<Rigidbody>();
-        rb.useGravity = true;
-        rb.isKinematic = false;
+
+        if (rb != null)
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+        }
+
         obj.transform.SetParent(null);
 
         return obj;

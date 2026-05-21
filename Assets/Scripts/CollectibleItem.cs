@@ -84,6 +84,8 @@ public class CollectibleItem : MonoBehaviour
             Debug.LogWarning("No se asignó ItemsManager en el ítem.");
         }
 
+        GetComponent<ApiCollectableReporter>()?.RegistrarRecoleccion();
+
         HideCollectedItemObjects();
 
         Debug.Log("Ítem recolectado: " + gameObject.name);

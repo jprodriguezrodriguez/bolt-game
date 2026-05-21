@@ -17349,7 +17349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986362653476286213, guid: d9a52dd403cb18d43b7b5149aaf6cffd, type: 3}
       propertyPath: wallLayer.m_Bits
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9165272798547095723, guid: d9a52dd403cb18d43b7b5149aaf6cffd, type: 3}
       propertyPath: energyBarUI
@@ -17485,6 +17485,22 @@ PrefabInstance:
     - target: {fileID: 8911123174686793610, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
       propertyPath: m_Name
       value: Corridor Corner (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18083,6 +18099,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1793815, y: 1.9900756, z: 0.39957318}
   m_Center: {x: 0, y: 0, z: 0.0000076293945}
+--- !u!114 &187810871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187810868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 2
+  idLogro: 4
+  usarCheckpoint: 1
+  idCheckpointAsociado: 7
+  puntajeAlRecolectar: 100
+--- !u!114 &187810872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187810868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 2
+  idCheckpoint: 7
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
 --- !u!1 &192243453
 GameObject:
   m_ObjectHideFlags: 0
@@ -40046,6 +40096,22 @@ PrefabInstance:
     - target: {fileID: 8911123174686793610, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
       propertyPath: m_Name
       value: Corridor Corner (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -63358,6 +63424,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corridor Corner (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -63433,6 +63515,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 786489490}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 786489492}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 786489493}
   m_SourcePrefab: {fileID: 100100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
 --- !u!1 &786489489 stripped
 GameObject:
@@ -63487,6 +63575,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1793815, y: 1.9900756, z: 0.39957318}
   m_Center: {x: 0, y: 0, z: 0.0000076293945}
+--- !u!114 &786489492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786489489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 2
+  idLogro: 2
+  usarCheckpoint: 1
+  idCheckpointAsociado: 8
+  puntajeAlRecolectar: 100
+--- !u!114 &786489493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786489489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 2
+  idCheckpoint: 8
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
 --- !u!1001 &798627741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70010,6 +70132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 907311377}
+  - component: {fileID: 907311378}
+  - component: {fileID: 907311379}
   m_Layer: 0
   m_Name: LevelStartPoint_N2
   m_TagString: Untagged
@@ -70032,6 +70156,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &907311378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907311376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 2
+  idCheckpoint: 6
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
+--- !u!114 &907311379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907311376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f35f6c3bb892d346b8eaedd0362de8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelApiInitializer
+  idTema: 2
+  registrarInicioNivel: 1
 --- !u!1 &922798294
 GameObject:
   m_ObjectHideFlags: 0
@@ -74956,6 +75111,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corridor Corner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -75366,6 +75537,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corridor Tee
       objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949033, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949033, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949045, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949045, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
     - target: {fileID: 321761353807982743, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -75744,6 +75931,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 187810869}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 187810871}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 187810872}
   m_SourcePrefab: {fileID: 100100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
 --- !u!1 &1019434415
 GameObject:
@@ -76204,6 +76397,22 @@ PrefabInstance:
     - target: {fileID: 8911123174686793610, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
       propertyPath: m_Name
       value: Corridor Corner (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -114565,6 +114774,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corridor Corner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -135249,6 +135474,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corridor Tee (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949033, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949033, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949045, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 321761353807949045, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
     - target: {fileID: 321761353807982743, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -147785,6 +148026,22 @@ PrefabInstance:
     - target: {fileID: 8911123174686793610, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
       propertyPath: m_Name
       value: Corridor Corner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793700, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911123174686793724, guid: 0caa079a07bb6bb4d8189cbe94d69429, type: 3}
+      propertyPath: m_TagString
+      value: BlockedWall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -165790,6 +166047,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1793815, y: 1.9900756, z: 0.39957318}
   m_Center: {x: 0, y: 0, z: 0.0000076293945}
+--- !u!114 &2005353942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005353939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145d944870d4c0498d31b276a1294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCollectableReporter
+  idTema: 2
+  idLogro: 3
+  usarCheckpoint: 1
+  idCheckpointAsociado: 9
+  puntajeAlRecolectar: 100
+--- !u!114 &2005353943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005353939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4f3afbbe3b8cf40a3ac565f6f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiCheckpointReporter
+  idTema: 2
+  idCheckpoint: 9
+  puntajeActual: 0
+  vidaActual: 0
+  energiaActual: 0
 --- !u!1 &2013573088
 GameObject:
   m_ObjectHideFlags: 0
@@ -166520,7 +166811,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
       propertyPath: m_Name
-      value: ElectricBox03Item_nivel2
+      value: ElectricBox03_nivel2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
       propertyPath: m_LocalScale.x
@@ -166580,6 +166871,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2005353940}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2005353942}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2005353943}
   m_SourcePrefab: {fileID: 100100000, guid: 5be67b90e3788794993aea72999671b3, type: 3}
 --- !u!1 &2078880895 stripped
 GameObject:
