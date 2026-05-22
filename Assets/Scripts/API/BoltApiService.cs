@@ -85,7 +85,8 @@ public class BoltApiService : MonoBehaviour
                 PlayerPrefs.SetString(PlayerPrefCodigoSesion, CodigoSesionActual);
                 PlayerPrefs.Save();
 
-                Debug.Log($"Usuario creado y guardado. ID: {IdUsuarioActual}, Alias: {AliasUsuarioActual}");
+                Debug.Log($"Usuario creado y guardado. ID: {IdUsuarioActual}, Alias: " +
+                    $"{AliasUsuarioActual}");
             },
             error =>
             {
